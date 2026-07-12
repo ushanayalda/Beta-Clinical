@@ -1,0 +1,42 @@
+{
+  "schema_version": "2.0.0",
+  "registry_version": "1.0.0",
+  "registry_id": "CP-REASONING-REGISTRY",
+  "status": "active",
+  "canonical_concepts": [],
+  "causal_error_guards": [
+    {
+      "guard_id": "GUARD-001",
+      "name": "Separate event, response, symptom, and complication",
+      "rule": "Never imply a response directly causes a complication without source support.",
+      "status": "approved",
+      "source_refs": [
+        "SRC-FIXTURE-001"
+      ]
+    }
+  ],
+  "terminology": [
+    {
+      "term_id": "TERM-001",
+      "preferred": "Hint",
+      "forbidden_visible_variants": [
+        "repair",
+        "reset",
+        "help"
+      ],
+      "status": "approved"
+    },
+    {
+      "term_id": "TERM-002",
+      "preferred": "you",
+      "forbidden_visible_variants": [
+        "candidate"
+      ],
+      "status": "approved"
+    }
+  ],
+  "case_index": [],
+  "unresolved_conflicts": [],
+  "last_updated": "2026-07-12",
+  "updated_by": "Fixture registry owner"
+}

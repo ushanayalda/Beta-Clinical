@@ -1,0 +1,103 @@
+{
+  "registry_version": "2.0.0",
+  "rule": "IDs are immutable within a case version. Rewording keeps the ID. Meaning changes require a new ID.",
+  "namespaces": [
+    {
+      "prefix": "STEM",
+      "pattern": "^STEM-[0-9]{3}$",
+      "entity": "Visible stem sentence or block"
+    },
+    {
+      "prefix": "TASK",
+      "pattern": "^TASK-[0-9]{3}$",
+      "entity": "Visible candidate task"
+    },
+    {
+      "prefix": "FACT",
+      "pattern": "^FACT-[0-9]{3}$",
+      "entity": "Canonical clinical fact"
+    },
+    {
+      "prefix": "FIND",
+      "pattern": "^FIND-[0-9]{3}$",
+      "entity": "Examiner-held finding or result"
+    },
+    {
+      "prefix": "ACTION",
+      "pattern": "^ACTION-[0-9]{3}$",
+      "entity": "Candidate action"
+    },
+    {
+      "prefix": "DEC",
+      "pattern": "^DEC-[0-9]{3}$",
+      "entity": "Clinical decision point"
+    },
+    {
+      "prefix": "TURN",
+      "pattern": "^TURN-[0-9]{3}$",
+      "entity": "Gold Run turn or non-spoken action"
+    },
+    {
+      "prefix": "FLEX",
+      "pattern": "^FLEX-[0-9]{3}$",
+      "entity": "Flexibility checkpoint"
+    },
+    {
+      "prefix": "CLAIM",
+      "pattern": "^CLAIM-[0-9]{3}$",
+      "entity": "Source-governed clinical claim"
+    },
+    {
+      "prefix": "SRC",
+      "pattern": "^SRC-[A-Z0-9-]{3,40}$",
+      "entity": "Source record"
+    },
+    {
+      "prefix": "RZN",
+      "pattern": "^RZN-[0-9]{3}$",
+      "entity": "Reasoning node"
+    },
+    {
+      "prefix": "HINT",
+      "pattern": "^HINT-[0-9]{3}$",
+      "entity": "Learner Hint"
+    },
+    {
+      "prefix": "TRAP",
+      "pattern": "^TRAP-[0-9]{3}$",
+      "entity": "Attention trap"
+    },
+    {
+      "prefix": "PIN",
+      "pattern": "^PIN-[0-9]{3}$",
+      "entity": "Safety Pin"
+    },
+    {
+      "prefix": "CLOCK",
+      "pattern": "^CLOCK-[0-9]{3}$",
+      "entity": "Internal clock segment"
+    },
+    {
+      "prefix": "ANCHOR",
+      "pattern": "^ANCHOR-[A-Z0-9-]{2,40}$",
+      "entity": "Visual task anchor"
+    },
+    {
+      "prefix": "CONCEPT",
+      "pattern": "^CONCEPT-[0-9]{3}$",
+      "entity": "Cross-case canonical concept"
+    },
+    {
+      "prefix": "GUARD",
+      "pattern": "^GUARD-[0-9]{3}$",
+      "entity": "Cross-case causal or safety guard"
+    }
+  ],
+  "reasoning_target_namespaces": [
+    "STEM",
+    "TASK",
+    "TURN",
+    "ACTION",
+    "DEC"
+  ]
+}

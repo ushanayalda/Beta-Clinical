@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Clinical Pathway AMC case study viewer">
+  <title>Clinical Pathway</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <button id="menuButton" class="menu-button" aria-expanded="false" aria-controls="sidebar">Cases</button>
+  <aside id="sidebar" class="sidebar" aria-label="Case navigation">
+    <a class="brand" href="./">Clinical Pathway</a>
+    <nav id="caseNavigation"></nav>
+  </aside>
+  <main id="main" class="main" tabindex="-1">
+    <section id="screen" class="screen" aria-live="polite"></section>
+  </main>
+  <script src="app.js" defer></script>
+</body>
+</html>

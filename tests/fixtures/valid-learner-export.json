@@ -1,0 +1,317 @@
+{
+  "schema_version": "2.0.0",
+  "case_id": "CP-P001-C001",
+  "case_version": "1.0.0",
+  "title": "Sudden discomfort in a validation fixture",
+  "navigation": {
+    "phase_id": "PHASE-1",
+    "phase_label": "Critical Emergency Dominance",
+    "pattern_label": "synthetic emergency validation",
+    "case_label": "CP-P001-C001 \u00b7 Sudden discomfort in a validation fixture"
+  },
+  "stem_page": {
+    "heading": "CANDIDATE INFORMATION AND TASKS",
+    "stem_nodes": [
+      {
+        "stem_id": "STEM-001",
+        "text": "You are a doctor in a synthetic test clinic.",
+        "hint_ids": []
+      },
+      {
+        "stem_id": "STEM-002",
+        "text": "An adult presents with sudden discomfort during activity.",
+        "hint_ids": [
+          "HINT-001"
+        ]
+      },
+      {
+        "stem_id": "STEM-003",
+        "text": "This fixture is for validation only, not clinical study.",
+        "hint_ids": []
+      }
+    ],
+    "tasks": [
+      {
+        "task_id": "TASK-001",
+        "text": "Assess the presenting problem.",
+        "anchor": {
+          "anchor_id": "ANCHOR-HX-FOCUSED",
+          "symbol": "\ud83d\udd0e",
+          "label": "Focused history"
+        },
+        "scope": "Find the safety threshold.",
+        "hint_ids": []
+      },
+      {
+        "task_id": "TASK-002",
+        "text": "Institute immediate management.",
+        "anchor": {
+          "anchor_id": "ANCHOR-IMMEDIATE",
+          "symbol": "\ud83d\udea8",
+          "label": "Immediate action"
+        },
+        "scope": "Start the first safe action.",
+        "hint_ids": []
+      },
+      {
+        "task_id": "TASK-003",
+        "text": "Explain the urgency and provide a handover.",
+        "anchor": {
+          "anchor_id": "ANCHOR-PRESENT",
+          "symbol": "\ud83d\udce3",
+          "label": "Present"
+        },
+        "scope": "Explain and hand over clearly.",
+        "hint_ids": [
+          "HINT-003"
+        ]
+      }
+    ]
+  },
+  "script_page": {
+    "turns": [
+      {
+        "turn_id": "TURN-001",
+        "speaker": "you",
+        "text": "Hello, I am the doctor here. Tell me what happened.",
+        "hint_ids": []
+      },
+      {
+        "turn_id": "TURN-002",
+        "speaker": "patient",
+        "text": "I have this sudden discomfort and it is not settling.",
+        "hint_ids": []
+      },
+      {
+        "turn_id": "TURN-003",
+        "speaker": "you",
+        "text": "What were you doing when it started, and what followed?",
+        "hint_ids": []
+      },
+      {
+        "turn_id": "TURN-004",
+        "speaker": "patient",
+        "text": "It began during activity, then the warning feature appeared.",
+        "hint_ids": []
+      },
+      {
+        "turn_id": "TURN-005",
+        "speaker": "you",
+        "text": "Please give me the immediate observations and focused finding.",
+        "hint_ids": []
+      },
+      {
+        "turn_id": "TURN-006",
+        "speaker": "examiner",
+        "text": "The synthetic observation and focused finding are abnormal.",
+        "hint_ids": [
+          "HINT-002",
+          "HINT-004"
+        ]
+      },
+      {
+        "turn_id": "TURN-007",
+        "speaker": "action",
+        "text": "I am activating the synthetic escalation pathway now.",
+        "hint_ids": []
+      },
+      {
+        "turn_id": "TURN-008",
+        "speaker": "you",
+        "text": "This pattern may be serious, so waiting here is not safe.",
+        "hint_ids": []
+      },
+      {
+        "turn_id": "TURN-009",
+        "speaker": "patient",
+        "text": "I was hoping to stay. Why do I need to transfer?",
+        "hint_ids": []
+      },
+      {
+        "turn_id": "TURN-010",
+        "speaker": "you",
+        "text": "The warning features mean the safer path is urgent assessment elsewhere.",
+        "hint_ids": []
+      },
+      {
+        "turn_id": "TURN-011",
+        "speaker": "patient",
+        "text": "I understand. I will go with the transfer team.",
+        "hint_ids": []
+      },
+      {
+        "turn_id": "TURN-012",
+        "speaker": "handover",
+        "text": "Synthetic handover: sudden onset, warning cluster, abnormal finding, escalation activated.",
+        "hint_ids": []
+      }
+    ]
+  },
+  "hints": [
+    {
+      "hint_id": "HINT-001",
+      "target_ref": "STEM-002",
+      "label": "Hint",
+      "visible_hint": "Does the context explain the whole pattern?",
+      "expanded": {
+        "observe": "The symptom began during activity.",
+        "connect": "Context changes probability but does not establish one cause.",
+        "mechanism": "The fixture uses context as a risk-changing clue, not a diagnosis.",
+        "clinical_weight": "Keep both the plausible and urgent paths open.",
+        "next_thought": "Look for the feature that changes the action threshold."
+      }
+    },
+    {
+      "hint_id": "HINT-002",
+      "target_ref": "TURN-006",
+      "label": "Hint",
+      "visible_hint": "What changed enough to act now?",
+      "expanded": {
+        "observe": "The warning feature and abnormal finding are present.",
+        "connect": "Together they cross the predefined fixture threshold.",
+        "mechanism": "The threshold converts assessment into immediate action.",
+        "clinical_weight": "Further proof must not delay the predefined action.",
+        "next_thought": "Start the action, then continue focused assessment."
+      }
+    },
+    {
+      "hint_id": "HINT-003",
+      "target_ref": "TASK-003",
+      "label": "Hint",
+      "visible_hint": "What must the patient understand before moving?",
+      "expanded": {
+        "observe": "The patient prefers to remain in the clinic.",
+        "connect": "The concern is practical, but the safety boundary remains.",
+        "mechanism": "Clear explanation can support cooperation without weakening urgency.",
+        "clinical_weight": "Address the concern underneath the resistance.",
+        "next_thought": "Explain the risk and what transfer involves."
+      }
+    },
+    {
+      "hint_id": "HINT-004",
+      "target_ref": "DEC-001",
+      "label": "Hint",
+      "visible_hint": "Has assessment now become action?",
+      "expanded": {
+        "observe": "The decision threshold has been crossed.",
+        "connect": "The next task is no longer more data collection.",
+        "mechanism": "The fixture decision point links the warning cluster to immediate escalation.",
+        "clinical_weight": "Action begins now while focused assessment continues in parallel.",
+        "next_thought": "State and start the immediate action."
+      }
+    }
+  ],
+  "clocks": {
+    "reading": {
+      "total_seconds": 120,
+      "segments": [
+        {
+          "clock_id": "CLOCK-001",
+          "start_second": 0,
+          "end_second": 40,
+          "label": "Setting",
+          "focus": "Who are you, where are you, and what can happen here?",
+          "target_refs": [
+            "STEM-001"
+          ]
+        },
+        {
+          "clock_id": "CLOCK-002",
+          "start_second": 40,
+          "end_second": 80,
+          "label": "Tasks",
+          "focus": "Turn each task into one visible destination.",
+          "target_refs": [
+            "TASK-001",
+            "TASK-002",
+            "TASK-003"
+          ]
+        },
+        {
+          "clock_id": "CLOCK-003",
+          "start_second": 80,
+          "end_second": 120,
+          "label": "Safety map",
+          "focus": "Keep the urgent path open before entering.",
+          "target_refs": [
+            "STEM-002",
+            "DEC-001"
+          ]
+        }
+      ]
+    },
+    "performance": {
+      "total_seconds": 480,
+      "segments": [
+        {
+          "clock_id": "CLOCK-004",
+          "start_second": 0,
+          "end_second": 160,
+          "label": "Assess",
+          "task_refs": [
+            "TASK-001"
+          ],
+          "move_on_signal": "The risk-changing facts are clear."
+        },
+        {
+          "clock_id": "CLOCK-005",
+          "start_second": 160,
+          "end_second": 320,
+          "label": "Act",
+          "task_refs": [
+            "TASK-002"
+          ],
+          "move_on_signal": "The immediate action has started."
+        },
+        {
+          "clock_id": "CLOCK-006",
+          "start_second": 320,
+          "end_second": 480,
+          "label": "Explain",
+          "task_refs": [
+            "TASK-003"
+          ],
+          "move_on_signal": "The explanation and handover are complete."
+        }
+      ]
+    }
+  },
+  "progress_control": {
+    "mode": "self_assessed",
+    "levels": [
+      {
+        "value": 0,
+        "label": "New"
+      },
+      {
+        "value": 1,
+        "label": "Finding the path"
+      },
+      {
+        "value": 2,
+        "label": "Can follow the path"
+      },
+      {
+        "value": 3,
+        "label": "Can run the case"
+      }
+    ],
+    "no_loss_state": true,
+    "storage": "local_device_only"
+  },
+  "release": {
+    "canonical_case_hash": "3bb3a78bee70d0dc23b8266b425570515debec695d6b7321194da026224bea0f",
+    "reasoning_layer_hash": "be81a8e892d0627c907ac20f71587435436d9cf1192029fdf995ead6f062671b",
+    "audit_report_id": "AUDIT-FIXTURE-001",
+    "audit_report_hash": "96ed95b87ce105aa46f22e0274746c283e3320d9980f8c1fa02908bda5d8fa77",
+    "registry_version": "1.0.0",
+    "registry_hash": "5301e2f45c59624750384ba83a30d198dc16b5799c70e4f32dd6dd2280891b47",
+    "clinical_review_status": "pass",
+    "educational_review_status": "pass",
+    "candidate_language_review_status": "pass",
+    "final_approval_status": "pass",
+    "release_status": "study_ready",
+    "release_date": "2026-07-12",
+    "source_bundle_hash": "a353d0abcd42e93b447390515eabf3ee1fe7096e27b99b1d1ec3e175fecb35ad"
+  }
+}

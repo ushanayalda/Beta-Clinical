@@ -1,0 +1,498 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://clinical-pathway.local/case-system-v2.0.0/schemas/registry-patch.schema.json",
+  "title": "Clinical Pathway reasoning registry patch",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "patch_id",
+    "case_id",
+    "case_version",
+    "base_registry_version",
+    "base_registry_hash",
+    "canonical_case_hash",
+    "reasoning_layer_hash",
+    "concept_additions",
+    "concept_updates",
+    "guard_additions",
+    "terminology_updates",
+    "case_index_entry",
+    "conflicts",
+    "human_approval"
+  ],
+  "$defs": {
+    "semver": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "hash": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "nonempty": {
+      "type": "string",
+      "minLength": 1
+    },
+    "case_id": {
+      "type": "string",
+      "pattern": "^CP-P[0-9]{3}-C[0-9]{3}$"
+    },
+    "phase_id": {
+      "enum": [
+        "PHASE-1",
+        "PHASE-2",
+        "PHASE-3",
+        "PHASE-4"
+      ]
+    },
+    "classification": {
+      "enum": [
+        "core",
+        "reserve",
+        "expansion"
+      ]
+    },
+    "station_grammar": {
+      "enum": [
+        "consultation",
+        "emergency",
+        "physical_examination",
+        "investigation_interpretation",
+        "examiner_presentation",
+        "mse_cognition",
+        "counselling",
+        "procedure_consent",
+        "student_teaching"
+      ]
+    },
+    "failure_mode": {
+      "enum": [
+        "premature_closure",
+        "unsafe_delay",
+        "station_mismatch",
+        "cognitive_overload",
+        "communication_breakdown",
+        "rigidity",
+        "performance_freeze"
+      ]
+    },
+    "review_status": {
+      "enum": [
+        "not_started",
+        "assigned",
+        "changes_required",
+        "blocked",
+        "pass"
+      ]
+    },
+    "workflow_status": {
+      "enum": [
+        "hold",
+        "draft",
+        "changes_required",
+        "blocked",
+        "pass"
+      ]
+    },
+    "source_ref": {
+      "type": "string",
+      "pattern": "^SRC-[A-Z0-9-]{3,40}$"
+    },
+    "task_ref": {
+      "type": "string",
+      "pattern": "^TASK-[0-9]{3}$"
+    },
+    "stem_ref": {
+      "type": "string",
+      "pattern": "^STEM-[0-9]{3}$"
+    },
+    "fact_ref": {
+      "type": "string",
+      "pattern": "^FACT-[0-9]{3}$"
+    },
+    "finding_ref": {
+      "type": "string",
+      "pattern": "^FIND-[0-9]{3}$"
+    },
+    "action_ref": {
+      "type": "string",
+      "pattern": "^ACTION-[0-9]{3}$"
+    },
+    "decision_ref": {
+      "type": "string",
+      "pattern": "^DEC-[0-9]{3}$"
+    },
+    "turn_ref": {
+      "type": "string",
+      "pattern": "^TURN-[0-9]{3}$"
+    },
+    "flex_ref": {
+      "type": "string",
+      "pattern": "^FLEX-[0-9]{3}$"
+    },
+    "claim_ref": {
+      "type": "string",
+      "pattern": "^CLAIM-[0-9]{3}$"
+    },
+    "reasoning_target_ref": {
+      "type": "string",
+      "pattern": "^(STEM|TASK|TURN|ACTION|DEC)-[0-9]{3}$"
+    }
+  },
+  "properties": {
+    "schema_version": {
+      "const": "2.0.0"
+    },
+    "patch_id": {
+      "type": "string",
+      "pattern": "^PATCH-[A-Z0-9-]{3,50}$"
+    },
+    "case_id": {
+      "$ref": "#/$defs/case_id"
+    },
+    "case_version": {
+      "$ref": "#/$defs/semver"
+    },
+    "base_registry_version": {
+      "$ref": "#/$defs/semver"
+    },
+    "base_registry_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "canonical_case_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "reasoning_layer_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "concept_additions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "concept_id",
+          "name",
+          "canonical_statement",
+          "clinical_scope",
+          "source_refs",
+          "status",
+          "approved_by",
+          "approved_date"
+        ],
+        "properties": {
+          "concept_id": {
+            "type": "string",
+            "pattern": "^CONCEPT-[0-9]{3}$"
+          },
+          "name": {
+            "$ref": "#/$defs/nonempty"
+          },
+          "canonical_statement": {
+            "$ref": "#/$defs/nonempty"
+          },
+          "clinical_scope": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "source_refs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/source_ref"
+            },
+            "uniqueItems": true
+          },
+          "status": {
+            "enum": [
+              "provisional",
+              "approved",
+              "retired"
+            ]
+          },
+          "approved_by": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "approved_date": {
+            "$ref": "#/$defs/date"
+          }
+        }
+      }
+    },
+    "concept_updates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "concept_id",
+          "replacement",
+          "reason"
+        ],
+        "properties": {
+          "concept_id": {
+            "type": "string",
+            "pattern": "^CONCEPT-[0-9]{3}$"
+          },
+          "replacement": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "concept_id",
+              "name",
+              "canonical_statement",
+              "clinical_scope",
+              "source_refs",
+              "status",
+              "approved_by",
+              "approved_date"
+            ],
+            "properties": {
+              "concept_id": {
+                "type": "string",
+                "pattern": "^CONCEPT-[0-9]{3}$"
+              },
+              "name": {
+                "$ref": "#/$defs/nonempty"
+              },
+              "canonical_statement": {
+                "$ref": "#/$defs/nonempty"
+              },
+              "clinical_scope": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "source_refs": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/source_ref"
+                },
+                "uniqueItems": true
+              },
+              "status": {
+                "enum": [
+                  "provisional",
+                  "approved",
+                  "retired"
+                ]
+              },
+              "approved_by": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "approved_date": {
+                "$ref": "#/$defs/date"
+              }
+            }
+          },
+          "reason": {
+            "$ref": "#/$defs/nonempty"
+          }
+        }
+      }
+    },
+    "guard_additions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "guard_id",
+          "name",
+          "rule",
+          "status",
+          "source_refs"
+        ],
+        "properties": {
+          "guard_id": {
+            "type": "string",
+            "pattern": "^GUARD-[0-9]{3}$"
+          },
+          "name": {
+            "$ref": "#/$defs/nonempty"
+          },
+          "rule": {
+            "$ref": "#/$defs/nonempty"
+          },
+          "status": {
+            "enum": [
+              "provisional",
+              "approved",
+              "retired"
+            ]
+          },
+          "source_refs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/source_ref"
+            },
+            "uniqueItems": true
+          }
+        }
+      }
+    },
+    "terminology_updates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "term_id",
+          "preferred",
+          "forbidden_visible_variants",
+          "status"
+        ],
+        "properties": {
+          "term_id": {
+            "type": "string",
+            "pattern": "^TERM-[0-9]{3}$"
+          },
+          "preferred": {
+            "$ref": "#/$defs/nonempty"
+          },
+          "forbidden_visible_variants": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "status": {
+            "enum": [
+              "provisional"
+            ]
+          }
+        }
+      }
+    },
+    "case_index_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "case_id",
+        "case_version",
+        "canonical_case_hash",
+        "reasoning_layer_hash",
+        "concept_refs",
+        "approved_date"
+      ],
+      "properties": {
+        "case_id": {
+          "$ref": "#/$defs/case_id"
+        },
+        "case_version": {
+          "$ref": "#/$defs/semver"
+        },
+        "canonical_case_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "reasoning_layer_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "concept_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^CONCEPT-[0-9]{3}$"
+          },
+          "uniqueItems": true
+        },
+        "approved_date": {
+          "$ref": "#/$defs/date"
+        }
+      }
+    },
+    "conflicts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "conflict_id",
+          "description",
+          "affected_refs",
+          "status"
+        ],
+        "properties": {
+          "conflict_id": {
+            "type": "string",
+            "pattern": "^CONFLICT-[0-9]{3}$"
+          },
+          "description": {
+            "$ref": "#/$defs/nonempty"
+          },
+          "affected_refs": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "enum": [
+              "open",
+              "resolved",
+              "accepted_hold"
+            ]
+          }
+        }
+      }
+    },
+    "human_approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "approved_by",
+        "approved_date"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "not_reviewed",
+            "approved",
+            "rejected"
+          ]
+        },
+        "approved_by": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "approved_date": {
+          "$ref": "#/$defs/date"
+        }
+      }
+    }
+  }
+}

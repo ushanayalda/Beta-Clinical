@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://clinical-pathway.local/case-system-v2.0.0/schemas/reasoning-response.schema.json",
+  "title": "Reasoning GPT response",
+  "oneOf": [
+    {
+      "$ref": "reasoning-layer.schema.json"
+    },
+    {
+      "$ref": "hold-report.schema.json"
+    }
+  ]
+}

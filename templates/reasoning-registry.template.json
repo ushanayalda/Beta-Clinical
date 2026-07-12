@@ -1,0 +1,40 @@
+{
+  "schema_version": "2.0.0",
+  "registry_version": "1.0.0",
+  "registry_id": "CP-REASONING-REGISTRY",
+  "status": "seed",
+  "canonical_concepts": [],
+  "causal_error_guards": [
+    {
+      "guard_id": "GUARD-001",
+      "name": "Separate event, response, symptom, and complication",
+      "rule": "Never imply that a physiological response directly causes a complication unless the source supports that causal link.",
+      "status": "approved",
+      "source_refs": []
+    }
+  ],
+  "terminology": [
+    {
+      "term_id": "TERM-001",
+      "preferred": "Hint",
+      "forbidden_visible_variants": [
+        "repair",
+        "reset",
+        "help"
+      ],
+      "status": "approved"
+    },
+    {
+      "term_id": "TERM-002",
+      "preferred": "you",
+      "forbidden_visible_variants": [
+        "candidate"
+      ],
+      "status": "approved"
+    }
+  ],
+  "case_index": [],
+  "unresolved_conflicts": [],
+  "last_updated": null,
+  "updated_by": null
+}

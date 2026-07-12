@@ -1,0 +1,104 @@
+{
+  "schema_version": "2.0.0",
+  "policy_version": "1.0.0",
+  "jurisdiction": "Australia",
+  "draft_generation": {
+    "web_research_allowed": true,
+    "official_sources_required": true,
+    "source_urls_must_be_recorded": true,
+    "exact_location_required": true,
+    "unsupported_high_risk_claim_result": "hold"
+  },
+  "preferred_authorities": [
+    {
+      "category": "exam_structure",
+      "issuing_bodies": [
+        "Australian Medical Council"
+      ],
+      "domains": [
+        "amc.org.au"
+      ]
+    },
+    {
+      "category": "national_policy_and_guidance",
+      "issuing_bodies": [
+        "Australian Government Department of Health, Disability and Ageing",
+        "National Health and Medical Research Council",
+        "Australian Commission on Safety and Quality in Health Care"
+      ],
+      "domains": [
+        "health.gov.au",
+        "nhmrc.gov.au",
+        "safetyandquality.gov.au"
+      ]
+    },
+    {
+      "category": "emergency_and_resuscitation",
+      "issuing_bodies": [
+        "Australian Resuscitation Council"
+      ],
+      "domains": [
+        "resus.org.au"
+      ]
+    },
+    {
+      "category": "general_practice",
+      "issuing_bodies": [
+        "Royal Australian College of General Practitioners"
+      ],
+      "domains": [
+        "racgp.org.au"
+      ]
+    },
+    {
+      "category": "specialty_and_state_guidance",
+      "issuing_bodies": [
+        "Heart Foundation",
+        "Cardiac Society of Australia and New Zealand",
+        "Royal Children's Hospital Melbourne",
+        "NSW Health",
+        "Queensland Health",
+        "Victoria Department of Health",
+        "SA Health",
+        "WA Health"
+      ],
+      "domains": [
+        "heartfoundation.org.au",
+        "csanz.edu.au",
+        "rch.org.au",
+        "health.nsw.gov.au",
+        "health.qld.gov.au",
+        "health.vic.gov.au",
+        "sahealth.sa.gov.au",
+        "health.wa.gov.au"
+      ]
+    },
+    {
+      "category": "licensed_clinical_references",
+      "issuing_bodies": [
+        "Therapeutic Guidelines",
+        "Australian Medicines Handbook"
+      ],
+      "domains": [
+        "tg.org.au",
+        "amh.net.au"
+      ],
+      "access_note": "Use only when the operator has lawful access. Do not fabricate inaccessible content."
+    }
+  ],
+  "source_order": [
+    "current Australian national or state guidance",
+    "current Australian specialty-society guidance",
+    "current AMC publications for examination mechanics only",
+    "licensed Australian clinical references when available",
+    "international primary guidance only when Australian guidance is absent and the limitation is explicit"
+  ],
+  "forbidden": [
+    "uncited clinical claims",
+    "anonymous summaries as clinical authority",
+    "exam recall material as treatment authority",
+    "invented publication dates or versions",
+    "claiming a source was archived when no archive exists"
+  ],
+  "locking_rule": "A case cannot be locked until every high-risk or critical claim is supported, every source has an archived file hash, and named human source and clinical reviews pass."
+}

@@ -1,0 +1,657 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://clinical-pathway.local/case-system-v2.0.0/schemas/learner-export.schema.json",
+  "title": "Clinical Pathway learner-safe website export",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "case_id",
+    "case_version",
+    "title",
+    "navigation",
+    "stem_page",
+    "script_page",
+    "hints",
+    "clocks",
+    "progress_control",
+    "release"
+  ],
+  "$defs": {
+    "semver": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "hash": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "nonempty": {
+      "type": "string",
+      "minLength": 1
+    },
+    "case_id": {
+      "type": "string",
+      "pattern": "^CP-P[0-9]{3}-C[0-9]{3}$"
+    },
+    "phase_id": {
+      "enum": [
+        "PHASE-1",
+        "PHASE-2",
+        "PHASE-3",
+        "PHASE-4"
+      ]
+    },
+    "classification": {
+      "enum": [
+        "core",
+        "reserve",
+        "expansion"
+      ]
+    },
+    "station_grammar": {
+      "enum": [
+        "consultation",
+        "emergency",
+        "physical_examination",
+        "investigation_interpretation",
+        "examiner_presentation",
+        "mse_cognition",
+        "counselling",
+        "procedure_consent",
+        "student_teaching"
+      ]
+    },
+    "failure_mode": {
+      "enum": [
+        "premature_closure",
+        "unsafe_delay",
+        "station_mismatch",
+        "cognitive_overload",
+        "communication_breakdown",
+        "rigidity",
+        "performance_freeze"
+      ]
+    },
+    "review_status": {
+      "enum": [
+        "not_started",
+        "assigned",
+        "changes_required",
+        "blocked",
+        "pass"
+      ]
+    },
+    "workflow_status": {
+      "enum": [
+        "hold",
+        "draft",
+        "changes_required",
+        "blocked",
+        "pass"
+      ]
+    },
+    "source_ref": {
+      "type": "string",
+      "pattern": "^SRC-[A-Z0-9-]{3,40}$"
+    },
+    "task_ref": {
+      "type": "string",
+      "pattern": "^TASK-[0-9]{3}$"
+    },
+    "stem_ref": {
+      "type": "string",
+      "pattern": "^STEM-[0-9]{3}$"
+    },
+    "fact_ref": {
+      "type": "string",
+      "pattern": "^FACT-[0-9]{3}$"
+    },
+    "finding_ref": {
+      "type": "string",
+      "pattern": "^FIND-[0-9]{3}$"
+    },
+    "action_ref": {
+      "type": "string",
+      "pattern": "^ACTION-[0-9]{3}$"
+    },
+    "decision_ref": {
+      "type": "string",
+      "pattern": "^DEC-[0-9]{3}$"
+    },
+    "turn_ref": {
+      "type": "string",
+      "pattern": "^TURN-[0-9]{3}$"
+    },
+    "flex_ref": {
+      "type": "string",
+      "pattern": "^FLEX-[0-9]{3}$"
+    },
+    "claim_ref": {
+      "type": "string",
+      "pattern": "^CLAIM-[0-9]{3}$"
+    },
+    "reasoning_target_ref": {
+      "type": "string",
+      "pattern": "^(STEM|TASK|TURN|ACTION|DEC)-[0-9]{3}$"
+    }
+  },
+  "properties": {
+    "schema_version": {
+      "const": "2.0.0"
+    },
+    "case_id": {
+      "$ref": "#/$defs/case_id"
+    },
+    "case_version": {
+      "$ref": "#/$defs/semver"
+    },
+    "title": {
+      "$ref": "#/$defs/nonempty"
+    },
+    "navigation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "phase_id",
+        "phase_label",
+        "pattern_label",
+        "case_label"
+      ],
+      "properties": {
+        "phase_id": {
+          "enum": [
+            "PHASE-1",
+            "PHASE-2",
+            "PHASE-3",
+            "PHASE-4"
+          ]
+        },
+        "phase_label": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "pattern_label": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "case_label": {
+          "$ref": "#/$defs/nonempty"
+        }
+      }
+    },
+    "stem_page": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "heading",
+        "stem_nodes",
+        "tasks"
+      ],
+      "properties": {
+        "heading": {
+          "const": "CANDIDATE INFORMATION AND TASKS"
+        },
+        "stem_nodes": {
+          "type": "array",
+          "minItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "stem_id",
+              "text",
+              "hint_ids"
+            ],
+            "properties": {
+              "stem_id": {
+                "$ref": "#/$defs/stem_ref"
+              },
+              "text": {
+                "$ref": "#/$defs/nonempty"
+              },
+              "hint_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^HINT-[0-9]{3}$"
+                },
+                "uniqueItems": true
+              }
+            }
+          }
+        },
+        "tasks": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "task_id",
+              "text",
+              "anchor",
+              "scope",
+              "hint_ids"
+            ],
+            "properties": {
+              "task_id": {
+                "$ref": "#/$defs/task_ref"
+              },
+              "text": {
+                "$ref": "#/$defs/nonempty"
+              },
+              "anchor": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "anchor_id",
+                  "symbol",
+                  "label"
+                ],
+                "properties": {
+                  "anchor_id": {
+                    "type": "string",
+                    "pattern": "^ANCHOR-[A-Z0-9-]{2,40}$"
+                  },
+                  "symbol": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 4
+                  },
+                  "label": {
+                    "$ref": "#/$defs/nonempty"
+                  }
+                }
+              },
+              "scope": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100
+              },
+              "hint_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^HINT-[0-9]{3}$"
+                },
+                "uniqueItems": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "script_page": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "turns"
+      ],
+      "properties": {
+        "turns": {
+          "type": "array",
+          "minItems": 10,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "turn_id",
+              "speaker",
+              "text",
+              "hint_ids"
+            ],
+            "properties": {
+              "turn_id": {
+                "$ref": "#/$defs/turn_ref"
+              },
+              "speaker": {
+                "enum": [
+                  "you",
+                  "patient",
+                  "examiner",
+                  "action",
+                  "handover"
+                ]
+              },
+              "text": {
+                "$ref": "#/$defs/nonempty"
+              },
+              "hint_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^HINT-[0-9]{3}$"
+                },
+                "uniqueItems": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "hints": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "hint_id",
+          "target_ref",
+          "label",
+          "visible_hint",
+          "expanded"
+        ],
+        "properties": {
+          "hint_id": {
+            "type": "string",
+            "pattern": "^HINT-[0-9]{3}$"
+          },
+          "target_ref": {
+            "$ref": "#/$defs/reasoning_target_ref"
+          },
+          "label": {
+            "const": "Hint"
+          },
+          "visible_hint": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "expanded": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "observe",
+              "connect",
+              "mechanism",
+              "clinical_weight",
+              "next_thought"
+            ],
+            "properties": {
+              "observe": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 500
+              },
+              "connect": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 500
+              },
+              "mechanism": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 500
+              },
+              "clinical_weight": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 500
+              },
+              "next_thought": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 500
+              }
+            }
+          }
+        }
+      }
+    },
+    "clocks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reading",
+        "performance"
+      ],
+      "properties": {
+        "reading": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "total_seconds",
+            "segments"
+          ],
+          "properties": {
+            "total_seconds": {
+              "const": 120
+            },
+            "segments": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 6,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "clock_id",
+                  "start_second",
+                  "end_second",
+                  "label",
+                  "focus",
+                  "target_refs"
+                ],
+                "properties": {
+                  "clock_id": {
+                    "type": "string",
+                    "pattern": "^CLOCK-[0-9]{3}$"
+                  },
+                  "start_second": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 119
+                  },
+                  "end_second": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 120
+                  },
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 30
+                  },
+                  "focus": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 120
+                  },
+                  "target_refs": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "$ref": "#/$defs/reasoning_target_ref"
+                    },
+                    "uniqueItems": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "performance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "total_seconds",
+            "segments"
+          ],
+          "properties": {
+            "total_seconds": {
+              "const": 480
+            },
+            "segments": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 8,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "clock_id",
+                  "start_second",
+                  "end_second",
+                  "label",
+                  "task_refs",
+                  "move_on_signal"
+                ],
+                "properties": {
+                  "clock_id": {
+                    "type": "string",
+                    "pattern": "^CLOCK-[0-9]{3}$"
+                  },
+                  "start_second": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 479
+                  },
+                  "end_second": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 480
+                  },
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 30
+                  },
+                  "task_refs": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "$ref": "#/$defs/task_ref"
+                    },
+                    "uniqueItems": true
+                  },
+                  "move_on_signal": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 120
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "progress_control": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "levels",
+        "no_loss_state",
+        "storage"
+      ],
+      "properties": {
+        "mode": {
+          "const": "self_assessed"
+        },
+        "levels": {
+          "const": [
+            {
+              "value": 0,
+              "label": "New"
+            },
+            {
+              "value": 1,
+              "label": "Finding the path"
+            },
+            {
+              "value": 2,
+              "label": "Can follow the path"
+            },
+            {
+              "value": 3,
+              "label": "Can run the case"
+            }
+          ]
+        },
+        "no_loss_state": {
+          "const": true
+        },
+        "storage": {
+          "const": "local_device_only"
+        }
+      }
+    },
+    "release": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonical_case_hash",
+        "reasoning_layer_hash",
+        "audit_report_id",
+        "audit_report_hash",
+        "source_bundle_hash",
+        "registry_version",
+        "registry_hash",
+        "clinical_review_status",
+        "educational_review_status",
+        "candidate_language_review_status",
+        "final_approval_status",
+        "release_status",
+        "release_date"
+      ],
+      "properties": {
+        "canonical_case_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "reasoning_layer_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "clinical_review_status": {
+          "const": "pass"
+        },
+        "educational_review_status": {
+          "const": "pass"
+        },
+        "candidate_language_review_status": {
+          "const": "pass"
+        },
+        "final_approval_status": {
+          "const": "pass"
+        },
+        "release_status": {
+          "const": "study_ready"
+        },
+        "release_date": {
+          "$ref": "#/$defs/date"
+        },
+        "audit_report_id": {
+          "type": "string",
+          "pattern": "^AUDIT-[A-Z0-9-]{3,60}$"
+        },
+        "audit_report_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "registry_version": {
+          "$ref": "#/$defs/semver"
+        },
+        "registry_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "source_bundle_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    }
+  }
+}

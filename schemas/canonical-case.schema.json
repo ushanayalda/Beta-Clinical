@@ -1,0 +1,1803 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://clinical-pathway.local/case-system-v2.0.0/schemas/canonical-case.schema.json",
+  "title": "Clinical Pathway canonical case without duplicate operator entry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "case_id",
+    "case_version",
+    "method_authority",
+    "layer_order",
+    "authority_summary",
+    "visible_station_card",
+    "clinical_truth",
+    "patient_layer",
+    "examiner_layer",
+    "gold_run",
+    "flexibility",
+    "assessment_guide",
+    "source_governance",
+    "workflow",
+    "integrity"
+  ],
+  "$defs": {
+    "semver": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "hash": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "nonempty": {
+      "type": "string",
+      "minLength": 1
+    },
+    "case_id": {
+      "type": "string",
+      "pattern": "^CP-P[0-9]{3}-C[0-9]{3}$"
+    },
+    "phase_id": {
+      "enum": [
+        "PHASE-1",
+        "PHASE-2",
+        "PHASE-3",
+        "PHASE-4"
+      ]
+    },
+    "classification": {
+      "enum": [
+        "core",
+        "reserve",
+        "expansion"
+      ]
+    },
+    "station_grammar": {
+      "enum": [
+        "consultation",
+        "emergency",
+        "physical_examination",
+        "investigation_interpretation",
+        "examiner_presentation",
+        "mse_cognition",
+        "counselling",
+        "procedure_consent",
+        "student_teaching"
+      ]
+    },
+    "failure_mode": {
+      "enum": [
+        "premature_closure",
+        "unsafe_delay",
+        "station_mismatch",
+        "cognitive_overload",
+        "communication_breakdown",
+        "rigidity",
+        "performance_freeze"
+      ]
+    },
+    "review_status": {
+      "enum": [
+        "not_started",
+        "assigned",
+        "changes_required",
+        "blocked",
+        "pass"
+      ]
+    },
+    "workflow_status": {
+      "enum": [
+        "hold",
+        "draft",
+        "changes_required",
+        "blocked",
+        "pass"
+      ]
+    },
+    "source_ref": {
+      "type": "string",
+      "pattern": "^SRC-[A-Z0-9-]{3,40}$"
+    },
+    "task_ref": {
+      "type": "string",
+      "pattern": "^TASK-[0-9]{3}$"
+    },
+    "stem_ref": {
+      "type": "string",
+      "pattern": "^STEM-[0-9]{3}$"
+    },
+    "fact_ref": {
+      "type": "string",
+      "pattern": "^FACT-[0-9]{3}$"
+    },
+    "finding_ref": {
+      "type": "string",
+      "pattern": "^FIND-[0-9]{3}$"
+    },
+    "action_ref": {
+      "type": "string",
+      "pattern": "^ACTION-[0-9]{3}$"
+    },
+    "decision_ref": {
+      "type": "string",
+      "pattern": "^DEC-[0-9]{3}$"
+    },
+    "turn_ref": {
+      "type": "string",
+      "pattern": "^TURN-[0-9]{3}$"
+    },
+    "flex_ref": {
+      "type": "string",
+      "pattern": "^FLEX-[0-9]{3}$"
+    },
+    "claim_ref": {
+      "type": "string",
+      "pattern": "^CLAIM-[0-9]{3}$"
+    },
+    "reasoning_target_ref": {
+      "type": "string",
+      "pattern": "^(STEM|TASK|TURN|ACTION|DEC)-[0-9]{3}$"
+    },
+    "source_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_id",
+        "source_url",
+        "file_name",
+        "file_sha256",
+        "archive_status",
+        "title",
+        "issuing_body",
+        "jurisdiction",
+        "date_or_version",
+        "exact_location",
+        "accessed_date",
+        "claims_supported",
+        "status"
+      ],
+      "properties": {
+        "source_id": {
+          "$ref": "#/$defs/source_ref"
+        },
+        "title": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "issuing_body": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "jurisdiction": {
+          "type": "string",
+          "minLength": 1
+        },
+        "date_or_version": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "exact_location": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "claims_supported": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/claim_ref"
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "status": {
+          "enum": [
+            "discovered",
+            "review_required",
+            "approved",
+            "rejected"
+          ]
+        },
+        "file_name": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "file_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "source_url": {
+          "type": "string",
+          "format": "uri",
+          "minLength": 8
+        },
+        "archive_status": {
+          "enum": [
+            "discovered",
+            "archived",
+            "unavailable"
+          ]
+        },
+        "accessed_date": {
+          "$ref": "#/$defs/date"
+        }
+      }
+    },
+    "id_list": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    }
+  },
+  "properties": {
+    "schema_version": {
+      "const": "2.0.0"
+    },
+    "case_id": {
+      "$ref": "#/$defs/case_id"
+    },
+    "case_version": {
+      "$ref": "#/$defs/semver"
+    },
+    "method_authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method_name",
+        "method_version",
+        "method_file_sha256"
+      ],
+      "properties": {
+        "method_name": {
+          "const": "Clinical Pathway Case Authoring Standard"
+        },
+        "method_version": {
+          "const": "2.0"
+        },
+        "method_file_sha256": {
+          "const": "d2883ec928156fd27da703c2798d8b91f5cdc3e2a1d45c4e5f7c4854e2604a8f"
+        }
+      }
+    },
+    "layer_order": {
+      "const": [
+        "visible_station_card",
+        "clinical_truth",
+        "patient_layer",
+        "examiner_layer",
+        "gold_run",
+        "flexibility",
+        "assessment_guide",
+        "source_governance",
+        "workflow"
+      ]
+    },
+    "authority_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pattern_id",
+        "phase_id",
+        "evolution_slot",
+        "classification",
+        "cluster",
+        "case_job",
+        "learner_confidence_target",
+        "generation_authority",
+        "station_grammar",
+        "primary_failure_mode"
+      ],
+      "properties": {
+        "pattern_id": {
+          "type": "string",
+          "pattern": "^CP-P[0-9]{3}$"
+        },
+        "phase_id": {
+          "$ref": "#/$defs/phase_id"
+        },
+        "evolution_slot": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        },
+        "classification": {
+          "$ref": "#/$defs/classification"
+        },
+        "cluster": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "case_job": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "learner_confidence_target": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "generation_authority": {
+          "type": "string",
+          "pattern": "^BUILD_CASE CP-P[0-9]{3}-C[0-9]{3}$"
+        },
+        "station_grammar": {
+          "$ref": "#/$defs/station_grammar"
+        },
+        "primary_failure_mode": {
+          "$ref": "#/$defs/failure_mode"
+        }
+      }
+    },
+    "visible_station_card": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "station_number",
+        "title",
+        "title_rule",
+        "heading",
+        "stem_nodes",
+        "tasks",
+        "constraints",
+        "reading_seconds",
+        "performance_seconds",
+        "final_endpoint"
+      ],
+      "properties": {
+        "station_number": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "title": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "title_rule": {
+          "enum": [
+            "diagnosis_hidden",
+            "known_diagnosis_may_be_visible"
+          ]
+        },
+        "heading": {
+          "const": "CANDIDATE INFORMATION AND TASKS"
+        },
+        "stem_nodes": {
+          "type": "array",
+          "minItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "stem_id",
+              "kind",
+              "text"
+            ],
+            "properties": {
+              "stem_id": {
+                "$ref": "#/$defs/stem_ref"
+              },
+              "kind": {
+                "enum": [
+                  "role_setting",
+                  "patient_context",
+                  "given_information",
+                  "supplied_material",
+                  "constraint"
+                ]
+              },
+              "text": {
+                "$ref": "#/$defs/nonempty"
+              }
+            }
+          }
+        },
+        "tasks": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 5,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "task_id",
+              "text",
+              "verb",
+              "recipient",
+              "anchor_id"
+            ],
+            "properties": {
+              "task_id": {
+                "$ref": "#/$defs/task_ref"
+              },
+              "text": {
+                "$ref": "#/$defs/nonempty"
+              },
+              "verb": {
+                "$ref": "#/$defs/nonempty"
+              },
+              "recipient": {
+                "$ref": "#/$defs/nonempty"
+              },
+              "anchor_id": {
+                "type": "string",
+                "pattern": "^ANCHOR-[A-Z0-9-]{2,40}$"
+              }
+            }
+          }
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "reading_seconds": {
+          "const": 120
+        },
+        "performance_seconds": {
+          "const": 480
+        },
+        "final_endpoint": {
+          "$ref": "#/$defs/nonempty"
+        }
+      }
+    },
+    "clinical_truth": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "priority_problem",
+        "main_risk",
+        "working_problem",
+        "dangerous_alternatives",
+        "facts",
+        "actions",
+        "decisions",
+        "claims",
+        "management",
+        "disposition",
+        "safety_net"
+      ],
+      "properties": {
+        "priority_problem": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "main_risk": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "working_problem": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "dangerous_alternatives": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "facts": {
+          "type": "array",
+          "minItems": 5,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "fact_id",
+              "category",
+              "text",
+              "information_owner",
+              "risk_level",
+              "claim_refs"
+            ],
+            "properties": {
+              "fact_id": {
+                "$ref": "#/$defs/fact_ref"
+              },
+              "category": {
+                "enum": [
+                  "chronology",
+                  "symptom",
+                  "negative",
+                  "risk_factor",
+                  "history",
+                  "medicine_allergy",
+                  "observation",
+                  "examination",
+                  "investigation",
+                  "communication",
+                  "management",
+                  "disposition"
+                ]
+              },
+              "text": {
+                "$ref": "#/$defs/nonempty"
+              },
+              "information_owner": {
+                "enum": [
+                  "visible_stem",
+                  "patient",
+                  "examiner",
+                  "derived",
+                  "not_available"
+                ]
+              },
+              "risk_level": {
+                "enum": [
+                  "low",
+                  "moderate",
+                  "high",
+                  "critical"
+                ]
+              },
+              "claim_refs": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/claim_ref"
+                },
+                "uniqueItems": true
+              }
+            }
+          }
+        },
+        "actions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "action_id",
+              "text",
+              "timing",
+              "task_refs",
+              "claim_refs"
+            ],
+            "properties": {
+              "action_id": {
+                "$ref": "#/$defs/action_ref"
+              },
+              "text": {
+                "$ref": "#/$defs/nonempty"
+              },
+              "timing": {
+                "enum": [
+                  "immediate",
+                  "parallel",
+                  "subsequent",
+                  "final"
+                ]
+              },
+              "task_refs": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/$defs/task_ref"
+                },
+                "uniqueItems": true
+              },
+              "claim_refs": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/claim_ref"
+                },
+                "uniqueItems": true
+              }
+            }
+          }
+        },
+        "decisions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "decision_id",
+              "question",
+              "threshold",
+              "evidence_fact_refs",
+              "result",
+              "action_refs"
+            ],
+            "properties": {
+              "decision_id": {
+                "$ref": "#/$defs/decision_ref"
+              },
+              "question": {
+                "$ref": "#/$defs/nonempty"
+              },
+              "threshold": {
+                "$ref": "#/$defs/nonempty"
+              },
+              "evidence_fact_refs": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/$defs/fact_ref"
+                },
+                "uniqueItems": true
+              },
+              "result": {
+                "enum": [
+                  "continue",
+                  "switch",
+                  "escalate"
+                ]
+              },
+              "action_refs": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/$defs/action_ref"
+                },
+                "uniqueItems": true
+              }
+            }
+          }
+        },
+        "claims": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "claim_id",
+              "text",
+              "claim_type",
+              "risk_level",
+              "source_refs",
+              "review_status"
+            ],
+            "properties": {
+              "claim_id": {
+                "$ref": "#/$defs/claim_ref"
+              },
+              "text": {
+                "$ref": "#/$defs/nonempty"
+              },
+              "claim_type": {
+                "enum": [
+                  "diagnosis",
+                  "differential",
+                  "investigation",
+                  "management",
+                  "medication",
+                  "escalation",
+                  "disposition",
+                  "safety_net",
+                  "physiology",
+                  "pathophysiology"
+                ]
+              },
+              "risk_level": {
+                "enum": [
+                  "low",
+                  "moderate",
+                  "high",
+                  "critical"
+                ]
+              },
+              "source_refs": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/$defs/source_ref"
+                },
+                "uniqueItems": true
+              },
+              "review_status": {
+                "enum": [
+                  "review_required",
+                  "human_approved",
+                  "rejected"
+                ]
+              }
+            }
+          }
+        },
+        "management": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/action_ref"
+          },
+          "uniqueItems": true
+        },
+        "disposition": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "safety_net": {
+          "$ref": "#/$defs/nonempty"
+        }
+      }
+    },
+    "patient_layer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "applicability",
+        "role_player_type",
+        "identity",
+        "opening_statement",
+        "volunteered_fact_refs",
+        "asked_only",
+        "emotional_tone",
+        "ideas",
+        "concerns",
+        "expectations",
+        "questions",
+        "resistance",
+        "acceptance_condition",
+        "do_not_volunteer_fact_refs",
+        "closing_response"
+      ],
+      "properties": {
+        "applicability": {
+          "enum": [
+            "applicable",
+            "not_applicable"
+          ]
+        },
+        "role_player_type": {
+          "enum": [
+            "patient",
+            "relative",
+            "parent",
+            "partner",
+            "student",
+            "none",
+            "other_source_approved"
+          ]
+        },
+        "identity": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "opening_statement": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "volunteered_fact_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fact_ref"
+          },
+          "uniqueItems": true
+        },
+        "asked_only": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "fact_ref",
+              "question_family",
+              "spoken_response",
+              "direct_question_required"
+            ],
+            "properties": {
+              "fact_ref": {
+                "$ref": "#/$defs/fact_ref"
+              },
+              "question_family": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "spoken_response": {
+                "$ref": "#/$defs/nonempty"
+              },
+              "direct_question_required": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "emotional_tone": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "ideas": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "concerns": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "expectations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "questions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "resistance": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "acceptance_condition": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "do_not_volunteer_fact_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fact_ref"
+          },
+          "uniqueItems": true
+        },
+        "closing_response": {
+          "$ref": "#/$defs/nonempty"
+        }
+      }
+    },
+    "examiner_layer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "aim",
+        "assessed_domains",
+        "expected_performance",
+        "findings",
+        "unavailable_items",
+        "timing_prompts",
+        "questions",
+        "do_not_provide",
+        "end_action"
+      ],
+      "properties": {
+        "aim": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "assessed_domains": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 5,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "expected_performance": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "finding_id",
+              "fact_ref",
+              "release_request",
+              "equivalent_requests",
+              "exact_wording",
+              "availability"
+            ],
+            "properties": {
+              "finding_id": {
+                "$ref": "#/$defs/finding_ref"
+              },
+              "fact_ref": {
+                "$ref": "#/$defs/fact_ref"
+              },
+              "release_request": {
+                "$ref": "#/$defs/nonempty"
+              },
+              "equivalent_requests": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "exact_wording": {
+                "$ref": "#/$defs/nonempty"
+              },
+              "availability": {
+                "enum": [
+                  "automatic",
+                  "on_request",
+                  "after_action"
+                ]
+              }
+            }
+          }
+        },
+        "unavailable_items": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "timing_prompts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "trigger",
+              "wording",
+              "purpose",
+              "reveals_answer"
+            ],
+            "properties": {
+              "trigger": {
+                "$ref": "#/$defs/nonempty"
+              },
+              "wording": {
+                "$ref": "#/$defs/nonempty"
+              },
+              "purpose": {
+                "$ref": "#/$defs/nonempty"
+              },
+              "reveals_answer": {
+                "const": false
+              }
+            }
+          }
+        },
+        "questions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "question",
+              "task_ref",
+              "expected_content",
+              "critical_omission"
+            ],
+            "properties": {
+              "question": {
+                "$ref": "#/$defs/nonempty"
+              },
+              "task_ref": {
+                "$ref": "#/$defs/task_ref"
+              },
+              "expected_content": {
+                "$ref": "#/$defs/nonempty"
+              },
+              "critical_omission": {
+                "$ref": "#/$defs/nonempty"
+              }
+            }
+          }
+        },
+        "do_not_provide": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "end_action": {
+          "$ref": "#/$defs/nonempty"
+        }
+      }
+    },
+    "gold_run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "estimated_duration_seconds",
+        "human_performability_status",
+        "turns",
+        "task_coverage"
+      ],
+      "properties": {
+        "estimated_duration_seconds": {
+          "type": "integer",
+          "minimum": 360,
+          "maximum": 480
+        },
+        "human_performability_status": {
+          "enum": [
+            "not_tested",
+            "pass",
+            "hold"
+          ]
+        },
+        "turns": {
+          "type": "array",
+          "minItems": 10,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "turn_id",
+              "speaker",
+              "text",
+              "start_second",
+              "end_second",
+              "task_refs",
+              "fact_refs",
+              "finding_refs",
+              "action_refs",
+              "decision_refs"
+            ],
+            "properties": {
+              "turn_id": {
+                "$ref": "#/$defs/turn_ref"
+              },
+              "speaker": {
+                "enum": [
+                  "candidate",
+                  "patient",
+                  "examiner",
+                  "candidate_action",
+                  "handover"
+                ]
+              },
+              "text": {
+                "$ref": "#/$defs/nonempty"
+              },
+              "start_second": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 479
+              },
+              "end_second": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 480
+              },
+              "task_refs": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/task_ref"
+                },
+                "uniqueItems": true
+              },
+              "fact_refs": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/fact_ref"
+                },
+                "uniqueItems": true
+              },
+              "finding_refs": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/finding_ref"
+                },
+                "uniqueItems": true
+              },
+              "action_refs": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/action_ref"
+                },
+                "uniqueItems": true
+              },
+              "decision_refs": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/decision_ref"
+                },
+                "uniqueItems": true
+              }
+            }
+          }
+        },
+        "task_coverage": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "task_ref",
+              "turn_refs",
+              "endpoint_reached"
+            ],
+            "properties": {
+              "task_ref": {
+                "$ref": "#/$defs/task_ref"
+              },
+              "turn_refs": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/$defs/turn_ref"
+                },
+                "uniqueItems": true
+              },
+              "endpoint_reached": {
+                "const": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "flexibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dominant_rigidity_trap",
+        "checkpoints",
+        "recovery"
+      ],
+      "properties": {
+        "dominant_rigidity_trap": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "description",
+            "why_tempting",
+            "earliest_warning",
+            "unsafe_consequence"
+          ],
+          "properties": {
+            "description": {
+              "$ref": "#/$defs/nonempty"
+            },
+            "why_tempting": {
+              "$ref": "#/$defs/nonempty"
+            },
+            "earliest_warning": {
+              "$ref": "#/$defs/nonempty"
+            },
+            "unsafe_consequence": {
+              "$ref": "#/$defs/nonempty"
+            }
+          }
+        },
+        "checkpoints": {
+          "type": "array",
+          "minItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "flex_id",
+              "trigger_ref",
+              "new_information_fact_refs",
+              "what_changed",
+              "what_still_fits",
+              "what_no_longer_fits",
+              "unsafe_to_miss",
+              "direction",
+              "action_threshold_change",
+              "required_action_refs",
+              "unsafe_rigid_response",
+              "recovery_sentence"
+            ],
+            "properties": {
+              "flex_id": {
+                "$ref": "#/$defs/flex_ref"
+              },
+              "trigger_ref": {
+                "$ref": "#/$defs/reasoning_target_ref"
+              },
+              "new_information_fact_refs": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/$defs/fact_ref"
+                },
+                "uniqueItems": true
+              },
+              "what_changed": {
+                "$ref": "#/$defs/nonempty"
+              },
+              "what_still_fits": {
+                "$ref": "#/$defs/nonempty"
+              },
+              "what_no_longer_fits": {
+                "$ref": "#/$defs/nonempty"
+              },
+              "unsafe_to_miss": {
+                "$ref": "#/$defs/nonempty"
+              },
+              "direction": {
+                "enum": [
+                  "continue",
+                  "switch",
+                  "escalate"
+                ]
+              },
+              "action_threshold_change": {
+                "enum": [
+                  "unchanged",
+                  "crossed",
+                  "lowered",
+                  "raised"
+                ]
+              },
+              "required_action_refs": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/$defs/action_ref"
+                },
+                "uniqueItems": true
+              },
+              "unsafe_rigid_response": {
+                "$ref": "#/$defs/nonempty"
+              },
+              "recovery_sentence": {
+                "$ref": "#/$defs/nonempty"
+              }
+            }
+          }
+        },
+        "recovery": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "wrong_path",
+            "exposing_fact_refs",
+            "recovery_sentence",
+            "immediate_action_refs",
+            "reentry_turn_ref",
+            "safety_boundary"
+          ],
+          "properties": {
+            "wrong_path": {
+              "$ref": "#/$defs/nonempty"
+            },
+            "exposing_fact_refs": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/fact_ref"
+              },
+              "uniqueItems": true
+            },
+            "recovery_sentence": {
+              "$ref": "#/$defs/nonempty"
+            },
+            "immediate_action_refs": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/action_ref"
+              },
+              "uniqueItems": true
+            },
+            "reentry_turn_ref": {
+              "$ref": "#/$defs/turn_ref"
+            },
+            "safety_boundary": {
+              "$ref": "#/$defs/nonempty"
+            }
+          }
+        }
+      }
+    },
+    "assessment_guide": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "aim",
+        "assessed_domains",
+        "expected_performance",
+        "key_issues",
+        "critical_errors",
+        "safe_behaviours",
+        "borderline_behaviours",
+        "unsafe_behaviours",
+        "hidden_commentary"
+      ],
+      "properties": {
+        "aim": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "assessed_domains": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 5,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "expected_performance": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "key_issues": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "critical_errors": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "safe_behaviours": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "borderline_behaviours": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "unsafe_behaviours": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "hidden_commentary": {
+          "$ref": "#/$defs/nonempty"
+        }
+      }
+    },
+    "source_governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sources",
+        "unresolved_gaps",
+        "human_review_questions",
+        "claim_coverage_status"
+      ],
+      "properties": {
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/source_record"
+          }
+        },
+        "unresolved_gaps": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "human_review_questions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "claim_coverage_status": {
+          "enum": [
+            "hold",
+            "complete_for_human_review",
+            "human_approved"
+          ]
+        }
+      }
+    },
+    "workflow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "generation",
+        "structure_audit",
+        "source_review",
+        "clinical_review",
+        "timing_test",
+        "canonical_case",
+        "reviews",
+        "lock_record"
+      ],
+      "properties": {
+        "generation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "generator_run_id",
+            "generator_identity",
+            "generated_at"
+          ],
+          "properties": {
+            "status": {
+              "enum": [
+                "draft_complete",
+                "hold",
+                "blocked"
+              ]
+            },
+            "generator_run_id": {
+              "$ref": "#/$defs/nonempty"
+            },
+            "generator_identity": {
+              "$ref": "#/$defs/nonempty"
+            },
+            "generated_at": {
+              "$ref": "#/$defs/date"
+            }
+          }
+        },
+        "structure_audit": {
+          "$ref": "#/$defs/review_status"
+        },
+        "source_review": {
+          "$ref": "#/$defs/review_status"
+        },
+        "clinical_review": {
+          "$ref": "#/$defs/review_status"
+        },
+        "timing_test": {
+          "$ref": "#/$defs/review_status"
+        },
+        "canonical_case": {
+          "enum": [
+            "not_locked",
+            "locked",
+            "blocked"
+          ]
+        },
+        "lock_record": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "decision",
+            "locked_by",
+            "locked_date",
+            "authoring_payload_hash",
+            "blocking_holds"
+          ],
+          "properties": {
+            "decision": {
+              "enum": [
+                "not_locked",
+                "locked",
+                "changes_required",
+                "blocked"
+              ]
+            },
+            "locked_by": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "locked_date": {
+              "$ref": "#/$defs/date"
+            },
+            "authoring_payload_hash": {
+              "$ref": "#/$defs/hash"
+            },
+            "blocking_holds": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "reviews": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "structure",
+            "source",
+            "clinical",
+            "timing"
+          ],
+          "properties": {
+            "structure": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "status",
+                "reviewer_name",
+                "reviewer_role",
+                "reviewer_origin",
+                "review_date",
+                "authoring_payload_hash",
+                "findings"
+              ],
+              "properties": {
+                "status": {
+                  "enum": [
+                    "not_started",
+                    "assigned",
+                    "changes_required",
+                    "blocked",
+                    "pass"
+                  ]
+                },
+                "reviewer_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "reviewer_role": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "reviewer_origin": {
+                  "enum": [
+                    "human",
+                    "independent_ai",
+                    "unassigned"
+                  ]
+                },
+                "review_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                },
+                "authoring_payload_hash": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "pattern": "^[a-f0-9]{64}$"
+                },
+                "findings": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            },
+            "source": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "status",
+                "reviewer_name",
+                "reviewer_role",
+                "reviewer_origin",
+                "review_date",
+                "authoring_payload_hash",
+                "findings"
+              ],
+              "properties": {
+                "status": {
+                  "enum": [
+                    "not_started",
+                    "assigned",
+                    "changes_required",
+                    "blocked",
+                    "pass"
+                  ]
+                },
+                "reviewer_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "reviewer_role": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "reviewer_origin": {
+                  "enum": [
+                    "human",
+                    "independent_ai",
+                    "unassigned"
+                  ]
+                },
+                "review_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                },
+                "authoring_payload_hash": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "pattern": "^[a-f0-9]{64}$"
+                },
+                "findings": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            },
+            "clinical": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "status",
+                "reviewer_name",
+                "reviewer_role",
+                "reviewer_origin",
+                "review_date",
+                "authoring_payload_hash",
+                "findings"
+              ],
+              "properties": {
+                "status": {
+                  "enum": [
+                    "not_started",
+                    "assigned",
+                    "changes_required",
+                    "blocked",
+                    "pass"
+                  ]
+                },
+                "reviewer_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "reviewer_role": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "reviewer_origin": {
+                  "enum": [
+                    "human",
+                    "independent_ai",
+                    "unassigned"
+                  ]
+                },
+                "review_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                },
+                "authoring_payload_hash": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "pattern": "^[a-f0-9]{64}$"
+                },
+                "findings": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            },
+            "timing": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "status",
+                "reviewer_name",
+                "reviewer_role",
+                "reviewer_origin",
+                "review_date",
+                "authoring_payload_hash",
+                "findings"
+              ],
+              "properties": {
+                "status": {
+                  "enum": [
+                    "not_started",
+                    "assigned",
+                    "changes_required",
+                    "blocked",
+                    "pass"
+                  ]
+                },
+                "reviewer_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "reviewer_role": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "reviewer_origin": {
+                  "enum": [
+                    "human",
+                    "independent_ai",
+                    "unassigned"
+                  ]
+                },
+                "review_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                },
+                "authoring_payload_hash": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "pattern": "^[a-f0-9]{64}$"
+                },
+                "findings": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "curriculum_entry_hash",
+        "source_bundle_hash",
+        "authoring_payload_hash",
+        "hash_algorithm",
+        "authoring_hash_scope"
+      ],
+      "properties": {
+        "authoring_payload_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "hash_algorithm": {
+          "const": "sha256"
+        },
+        "authoring_hash_scope": {
+          "const": "canonical_content_excluding_workflow_integrity_and_approval_status_fields"
+        },
+        "curriculum_entry_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "source_bundle_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    }
+  }
+}

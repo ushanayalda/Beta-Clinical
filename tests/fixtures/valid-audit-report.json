@@ -1,0 +1,63 @@
+{
+  "schema_version": "2.0.0",
+  "case_id": "CP-P001-C001",
+  "case_version": "1.0.0",
+  "canonical_case_hash": "3bb3a78bee70d0dc23b8266b425570515debec695d6b7321194da026224bea0f",
+  "reasoning_layer_hash": "be81a8e892d0627c907ac20f71587435436d9cf1192029fdf995ead6f062671b",
+  "generator_run_ids": [
+    "GEN-FIXTURE-001",
+    "RGEN-FIXTURE-001"
+  ],
+  "auditor_run_id": "AUD-FIXTURE-001",
+  "auditor_identity": "Independent fixture auditor",
+  "auditor_origin": "independent_ai",
+  "independence_basis": "Separate run and identity from both generators.",
+  "audited_at": "2026-07-12",
+  "checks": {
+    "schema_validation": "pass",
+    "stable_id_uniqueness": "pass",
+    "cross_reference_resolution": "pass",
+    "canonical_hash_binding": "pass",
+    "reasoning_hash_binding": "pass",
+    "task_snapshot_exactness": "pass",
+    "task_coverage": "pass",
+    "hint_target_resolution": "pass",
+    "logic_turn_resolution": "pass",
+    "clock_contiguity": "pass",
+    "clock_task_alignment": "pass",
+    "clinical_chronology": "pass",
+    "causal_accuracy": "pass",
+    "emergency_priority": "pass",
+    "medication_support": "pass",
+    "answer_leakage": "pass",
+    "cognitive_load": "pass",
+    "neuroaffirming_language": "pass",
+    "cross_case_consistency": "pass",
+    "source_traceability": "pass",
+    "learner_export_boundary": "pass",
+    "human_review_boundary": "pass",
+    "source_file_integrity": "pass",
+    "registry_binding": "pass",
+    "review_hash_binding": "pass",
+    "display_attachment_binding": "pass",
+    "website_accessibility_boundary": "pass",
+    "curriculum_entry_binding": "pass",
+    "source_bundle_binding": "pass"
+  },
+  "findings": [],
+  "repairs_applied": [
+    "Fixture generated in a passing state."
+  ],
+  "rerun_status": "pass",
+  "final_status": "pass_to_human_review",
+  "audit_report_id": "AUDIT-FIXTURE-001",
+  "registry_version": "1.0.0",
+  "registry_hash": "5301e2f45c59624750384ba83a30d198dc16b5799c70e4f32dd6dd2280891b47",
+  "integrity": {
+    "audit_report_hash": "96ed95b87ce105aa46f22e0274746c283e3320d9980f8c1fa02908bda5d8fa77",
+    "hash_algorithm": "sha256",
+    "hash_scope": "full_audit_report_excluding_integrity.audit_report_hash"
+  },
+  "curriculum_entry_hash": "6d3fe0e9c226672e726085c77bd49de0a79a3c317f8331b96c974f4aaa249609",
+  "source_bundle_hash": "a353d0abcd42e93b447390515eabf3ee1fe7096e27b99b1d1ec3e175fecb35ad"
+}

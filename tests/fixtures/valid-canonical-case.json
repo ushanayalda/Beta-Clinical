@@ -1,0 +1,807 @@
+{
+  "schema_version": "2.0.0",
+  "case_id": "CP-P001-C001",
+  "case_version": "1.0.0",
+  "method_authority": {
+    "method_name": "Clinical Pathway Case Authoring Standard",
+    "method_version": "2.0",
+    "method_file_sha256": "d2883ec928156fd27da703c2798d8b91f5cdc3e2a1d45c4e5f7c4854e2604a8f"
+  },
+  "layer_order": [
+    "visible_station_card",
+    "clinical_truth",
+    "patient_layer",
+    "examiner_layer",
+    "gold_run",
+    "flexibility",
+    "assessment_guide",
+    "source_governance",
+    "workflow"
+  ],
+  "authority_summary": {
+    "pattern_id": "CP-P001",
+    "phase_id": "PHASE-1",
+    "evolution_slot": 1,
+    "classification": "core",
+    "cluster": "synthetic emergency validation",
+    "case_job": "Validate the executable contracts without supplying clinical teaching.",
+    "learner_confidence_target": "I can follow a safe test pathway.",
+    "generation_authority": "BUILD_CASE CP-P001-C001",
+    "station_grammar": "emergency",
+    "primary_failure_mode": "unsafe_delay"
+  },
+  "visible_station_card": {
+    "station_number": "001",
+    "title": "Sudden discomfort in a validation fixture",
+    "title_rule": "diagnosis_hidden",
+    "heading": "CANDIDATE INFORMATION AND TASKS",
+    "stem_nodes": [
+      {
+        "stem_id": "STEM-001",
+        "kind": "role_setting",
+        "text": "You are a doctor in a synthetic test clinic."
+      },
+      {
+        "stem_id": "STEM-002",
+        "kind": "patient_context",
+        "text": "An adult presents with sudden discomfort during activity."
+      },
+      {
+        "stem_id": "STEM-003",
+        "kind": "constraint",
+        "text": "This fixture is for validation only, not clinical study."
+      }
+    ],
+    "tasks": [
+      {
+        "task_id": "TASK-001",
+        "text": "Assess the presenting problem.",
+        "verb": "Assess",
+        "recipient": "patient",
+        "anchor_id": "ANCHOR-HX-FOCUSED"
+      },
+      {
+        "task_id": "TASK-002",
+        "text": "Institute immediate management.",
+        "verb": "Institute",
+        "recipient": "patient and team",
+        "anchor_id": "ANCHOR-IMMEDIATE"
+      },
+      {
+        "task_id": "TASK-003",
+        "text": "Explain the urgency and provide a handover.",
+        "verb": "Explain",
+        "recipient": "patient and examiner",
+        "anchor_id": "ANCHOR-PRESENT"
+      }
+    ],
+    "constraints": [
+      "Do not use this fixture for clinical study."
+    ],
+    "reading_seconds": 120,
+    "performance_seconds": 480,
+    "final_endpoint": "Safe action, explanation, and handover are complete."
+  },
+  "clinical_truth": {
+    "priority_problem": "Synthetic time-critical syndrome.",
+    "main_risk": "Delay in the predefined safe action.",
+    "working_problem": "Test emergency syndrome",
+    "dangerous_alternatives": [
+      "Alternative synthetic condition."
+    ],
+    "facts": [
+      {
+        "fact_id": "FACT-001",
+        "category": "chronology",
+        "text": "The symptom began suddenly during activity.",
+        "information_owner": "patient",
+        "risk_level": "moderate",
+        "claim_refs": [
+          "CLAIM-001"
+        ]
+      },
+      {
+        "fact_id": "FACT-002",
+        "category": "symptom",
+        "text": "The discomfort remains present.",
+        "information_owner": "patient",
+        "risk_level": "high",
+        "claim_refs": [
+          "CLAIM-001"
+        ]
+      },
+      {
+        "fact_id": "FACT-003",
+        "category": "symptom",
+        "text": "A synthetic warning feature is present.",
+        "information_owner": "patient",
+        "risk_level": "critical",
+        "claim_refs": [
+          "CLAIM-001"
+        ]
+      },
+      {
+        "fact_id": "FACT-004",
+        "category": "negative",
+        "text": "A fictional exclusion feature is absent.",
+        "information_owner": "patient",
+        "risk_level": "moderate",
+        "claim_refs": [
+          "CLAIM-001"
+        ]
+      },
+      {
+        "fact_id": "FACT-005",
+        "category": "risk_factor",
+        "text": "A synthetic risk factor is present.",
+        "information_owner": "patient",
+        "risk_level": "moderate",
+        "claim_refs": [
+          "CLAIM-001"
+        ]
+      },
+      {
+        "fact_id": "FACT-006",
+        "category": "observation",
+        "text": "A synthetic observation is abnormal.",
+        "information_owner": "examiner",
+        "risk_level": "critical",
+        "claim_refs": [
+          "CLAIM-001"
+        ]
+      },
+      {
+        "fact_id": "FACT-007",
+        "category": "investigation",
+        "text": "The synthetic result supports escalation but is not definitive.",
+        "information_owner": "examiner",
+        "risk_level": "high",
+        "claim_refs": [
+          "CLAIM-001"
+        ]
+      },
+      {
+        "fact_id": "FACT-008",
+        "category": "communication",
+        "text": "The patient initially prefers to remain in the clinic.",
+        "information_owner": "patient",
+        "risk_level": "moderate",
+        "claim_refs": [
+          "CLAIM-002"
+        ]
+      },
+      {
+        "fact_id": "FACT-009",
+        "category": "management",
+        "text": "The synthetic escalation pathway is the predefined action.",
+        "information_owner": "derived",
+        "risk_level": "critical",
+        "claim_refs": [
+          "CLAIM-002"
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "action_id": "ACTION-001",
+        "text": "Activate the synthetic escalation pathway.",
+        "timing": "immediate",
+        "task_refs": [
+          "TASK-002"
+        ],
+        "claim_refs": [
+          "CLAIM-002"
+        ]
+      },
+      {
+        "action_id": "ACTION-002",
+        "text": "Continue focused assessment while escalation proceeds.",
+        "timing": "parallel",
+        "task_refs": [
+          "TASK-001"
+        ],
+        "claim_refs": [
+          "CLAIM-002"
+        ]
+      },
+      {
+        "action_id": "ACTION-003",
+        "text": "Explain the urgency and give a concise handover.",
+        "timing": "final",
+        "task_refs": [
+          "TASK-003"
+        ],
+        "claim_refs": [
+          "CLAIM-002"
+        ]
+      }
+    ],
+    "decisions": [
+      {
+        "decision_id": "DEC-001",
+        "question": "Has the synthetic action threshold been crossed?",
+        "threshold": "Warning feature plus abnormal observation.",
+        "evidence_fact_refs": [
+          "FACT-003",
+          "FACT-006"
+        ],
+        "result": "escalate",
+        "action_refs": [
+          "ACTION-001",
+          "ACTION-002"
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "claim_id": "CLAIM-001",
+        "text": "The synthetic warning cluster crosses the fixture action threshold.",
+        "claim_type": "diagnosis",
+        "risk_level": "critical",
+        "source_refs": [
+          "SRC-FIXTURE-001"
+        ],
+        "review_status": "human_approved"
+      },
+      {
+        "claim_id": "CLAIM-002",
+        "text": "The fixture requires immediate synthetic escalation and explanation.",
+        "claim_type": "escalation",
+        "risk_level": "critical",
+        "source_refs": [
+          "SRC-FIXTURE-001"
+        ],
+        "review_status": "human_approved"
+      }
+    ],
+    "management": [
+      "ACTION-001",
+      "ACTION-002",
+      "ACTION-003"
+    ],
+    "disposition": "Synthetic urgent transfer.",
+    "safety_net": "Remain monitored until transfer."
+  },
+  "patient_layer": {
+    "applicability": "applicable",
+    "role_player_type": "patient",
+    "identity": "Adult validation role-player.",
+    "opening_statement": "I have this sudden discomfort and it is not settling.",
+    "volunteered_fact_refs": [
+      "FACT-002"
+    ],
+    "asked_only": [
+      {
+        "fact_ref": "FACT-001",
+        "question_family": [
+          "What were you doing when it started?"
+        ],
+        "spoken_response": "It began during activity.",
+        "direct_question_required": false
+      },
+      {
+        "fact_ref": "FACT-003",
+        "question_family": [
+          "What happened next?"
+        ],
+        "spoken_response": "Then the warning feature appeared.",
+        "direct_question_required": false
+      },
+      {
+        "fact_ref": "FACT-008",
+        "question_family": [
+          "How do you feel about transfer?"
+        ],
+        "spoken_response": "I hoped to stay here.",
+        "direct_question_required": true
+      }
+    ],
+    "emotional_tone": "Concerned but cooperative.",
+    "ideas": [
+      "It may be benign."
+    ],
+    "concerns": [
+      "It is not settling."
+    ],
+    "expectations": [
+      "Wants an explanation."
+    ],
+    "questions": [
+      "Why do I need to transfer?"
+    ],
+    "resistance": "Initially prefers to stay.",
+    "acceptance_condition": "Accepts after the risk and process are explained.",
+    "do_not_volunteer_fact_refs": [
+      "FACT-003",
+      "FACT-005"
+    ],
+    "closing_response": "I understand. I will go with the transfer team."
+  },
+  "examiner_layer": {
+    "aim": "Test safe synthetic emergency sequencing.",
+    "assessed_domains": [
+      "assessment",
+      "management",
+      "communication"
+    ],
+    "expected_performance": "Recognise the threshold, act promptly, explain, and hand over.",
+    "findings": [
+      {
+        "finding_id": "FIND-001",
+        "fact_ref": "FACT-006",
+        "release_request": "Immediate observations and focused finding.",
+        "equivalent_requests": [
+          "Vital observations and focused examination."
+        ],
+        "exact_wording": "The synthetic observation and focused finding are abnormal.",
+        "availability": "on_request"
+      }
+    ],
+    "unavailable_items": [
+      "Definitive synthetic diagnosis."
+    ],
+    "timing_prompts": [],
+    "questions": [
+      {
+        "question": "What is your immediate plan?",
+        "task_ref": "TASK-002",
+        "expected_content": "Activate the synthetic escalation pathway.",
+        "critical_omission": "Any delay after the threshold."
+      }
+    ],
+    "do_not_provide": [
+      "The final diagnosis."
+    ],
+    "end_action": "Stop after the handover."
+  },
+  "gold_run": {
+    "estimated_duration_seconds": 420,
+    "human_performability_status": "pass",
+    "turns": [
+      {
+        "turn_id": "TURN-001",
+        "speaker": "candidate",
+        "text": "Hello, I am the doctor here. Tell me what happened.",
+        "start_second": 0,
+        "end_second": 20,
+        "task_refs": [
+          "TASK-001"
+        ],
+        "fact_refs": [],
+        "finding_refs": [],
+        "action_refs": [],
+        "decision_refs": []
+      },
+      {
+        "turn_id": "TURN-002",
+        "speaker": "patient",
+        "text": "I have this sudden discomfort and it is not settling.",
+        "start_second": 20,
+        "end_second": 35,
+        "task_refs": [
+          "TASK-001"
+        ],
+        "fact_refs": [
+          "FACT-002"
+        ],
+        "finding_refs": [],
+        "action_refs": [],
+        "decision_refs": []
+      },
+      {
+        "turn_id": "TURN-003",
+        "speaker": "candidate",
+        "text": "What were you doing when it started, and what followed?",
+        "start_second": 35,
+        "end_second": 55,
+        "task_refs": [
+          "TASK-001"
+        ],
+        "fact_refs": [],
+        "finding_refs": [],
+        "action_refs": [],
+        "decision_refs": []
+      },
+      {
+        "turn_id": "TURN-004",
+        "speaker": "patient",
+        "text": "It began during activity, then the warning feature appeared.",
+        "start_second": 55,
+        "end_second": 75,
+        "task_refs": [
+          "TASK-001"
+        ],
+        "fact_refs": [
+          "FACT-001",
+          "FACT-003"
+        ],
+        "finding_refs": [],
+        "action_refs": [],
+        "decision_refs": []
+      },
+      {
+        "turn_id": "TURN-005",
+        "speaker": "candidate",
+        "text": "Please give me the immediate observations and focused finding.",
+        "start_second": 75,
+        "end_second": 90,
+        "task_refs": [
+          "TASK-001"
+        ],
+        "fact_refs": [],
+        "finding_refs": [],
+        "action_refs": [],
+        "decision_refs": []
+      },
+      {
+        "turn_id": "TURN-006",
+        "speaker": "examiner",
+        "text": "The synthetic observation and focused finding are abnormal.",
+        "start_second": 90,
+        "end_second": 105,
+        "task_refs": [
+          "TASK-001"
+        ],
+        "fact_refs": [
+          "FACT-006"
+        ],
+        "finding_refs": [
+          "FIND-001"
+        ],
+        "action_refs": [],
+        "decision_refs": [
+          "DEC-001"
+        ]
+      },
+      {
+        "turn_id": "TURN-007",
+        "speaker": "candidate_action",
+        "text": "I am activating the synthetic escalation pathway now.",
+        "start_second": 105,
+        "end_second": 120,
+        "task_refs": [
+          "TASK-002"
+        ],
+        "fact_refs": [
+          "FACT-003",
+          "FACT-006"
+        ],
+        "finding_refs": [
+          "FIND-001"
+        ],
+        "action_refs": [
+          "ACTION-001",
+          "ACTION-002"
+        ],
+        "decision_refs": [
+          "DEC-001"
+        ]
+      },
+      {
+        "turn_id": "TURN-008",
+        "speaker": "candidate",
+        "text": "This pattern may be serious, so waiting here is not safe.",
+        "start_second": 120,
+        "end_second": 150,
+        "task_refs": [
+          "TASK-003"
+        ],
+        "fact_refs": [
+          "FACT-003",
+          "FACT-006"
+        ],
+        "finding_refs": [],
+        "action_refs": [
+          "ACTION-003"
+        ],
+        "decision_refs": []
+      },
+      {
+        "turn_id": "TURN-009",
+        "speaker": "patient",
+        "text": "I was hoping to stay. Why do I need to transfer?",
+        "start_second": 150,
+        "end_second": 175,
+        "task_refs": [
+          "TASK-003"
+        ],
+        "fact_refs": [
+          "FACT-008"
+        ],
+        "finding_refs": [],
+        "action_refs": [],
+        "decision_refs": []
+      },
+      {
+        "turn_id": "TURN-010",
+        "speaker": "candidate",
+        "text": "The warning features mean the safer path is urgent assessment elsewhere.",
+        "start_second": 175,
+        "end_second": 210,
+        "task_refs": [
+          "TASK-003"
+        ],
+        "fact_refs": [
+          "FACT-003",
+          "FACT-006"
+        ],
+        "finding_refs": [],
+        "action_refs": [
+          "ACTION-003"
+        ],
+        "decision_refs": []
+      },
+      {
+        "turn_id": "TURN-011",
+        "speaker": "patient",
+        "text": "I understand. I will go with the transfer team.",
+        "start_second": 210,
+        "end_second": 225,
+        "task_refs": [
+          "TASK-003"
+        ],
+        "fact_refs": [
+          "FACT-008"
+        ],
+        "finding_refs": [],
+        "action_refs": [],
+        "decision_refs": []
+      },
+      {
+        "turn_id": "TURN-012",
+        "speaker": "handover",
+        "text": "Synthetic handover: sudden onset, warning cluster, abnormal finding, escalation activated.",
+        "start_second": 225,
+        "end_second": 270,
+        "task_refs": [
+          "TASK-003"
+        ],
+        "fact_refs": [
+          "FACT-001",
+          "FACT-003",
+          "FACT-006"
+        ],
+        "finding_refs": [
+          "FIND-001"
+        ],
+        "action_refs": [
+          "ACTION-001",
+          "ACTION-003"
+        ],
+        "decision_refs": [
+          "DEC-001"
+        ]
+      }
+    ],
+    "task_coverage": [
+      {
+        "task_ref": "TASK-001",
+        "turn_refs": [
+          "TURN-001",
+          "TURN-002",
+          "TURN-003",
+          "TURN-004",
+          "TURN-005",
+          "TURN-006"
+        ],
+        "endpoint_reached": true
+      },
+      {
+        "task_ref": "TASK-002",
+        "turn_refs": [
+          "TURN-007"
+        ],
+        "endpoint_reached": true
+      },
+      {
+        "task_ref": "TASK-003",
+        "turn_refs": [
+          "TURN-008",
+          "TURN-009",
+          "TURN-010",
+          "TURN-011",
+          "TURN-012"
+        ],
+        "endpoint_reached": true
+      }
+    ]
+  },
+  "flexibility": {
+    "dominant_rigidity_trap": {
+      "description": "Protecting the benign label.",
+      "why_tempting": "The first explanation feels familiar.",
+      "earliest_warning": "The warning feature appears.",
+      "unsafe_consequence": "The predefined action is delayed."
+    },
+    "checkpoints": [
+      {
+        "flex_id": "FLEX-001",
+        "trigger_ref": "STEM-002",
+        "new_information_fact_refs": [
+          "FACT-001"
+        ],
+        "what_changed": "Activity context raises concern.",
+        "what_still_fits": "A benign explanation remains possible.",
+        "what_no_longer_fits": "The benign label cannot close the case.",
+        "unsafe_to_miss": "The warning cluster.",
+        "direction": "continue",
+        "action_threshold_change": "unchanged",
+        "required_action_refs": [
+          "ACTION-002"
+        ],
+        "unsafe_rigid_response": "Stop after the first label.",
+        "recovery_sentence": "I will keep the urgent path open while I assess."
+      },
+      {
+        "flex_id": "FLEX-002",
+        "trigger_ref": "TURN-006",
+        "new_information_fact_refs": [
+          "FACT-003",
+          "FACT-006"
+        ],
+        "what_changed": "The warning cluster is now present.",
+        "what_still_fits": "The original symptom remains relevant.",
+        "what_no_longer_fits": "Routine clinic assessment alone is insufficient.",
+        "unsafe_to_miss": "The action threshold has been crossed.",
+        "direction": "escalate",
+        "action_threshold_change": "crossed",
+        "required_action_refs": [
+          "ACTION-001",
+          "ACTION-002"
+        ],
+        "unsafe_rigid_response": "Wait for definitive proof.",
+        "recovery_sentence": "This new finding changes the risk, so I am escalating now."
+      },
+      {
+        "flex_id": "FLEX-003",
+        "trigger_ref": "TURN-009",
+        "new_information_fact_refs": [
+          "FACT-008"
+        ],
+        "what_changed": "The patient prefers to stay.",
+        "what_still_fits": "Urgent transfer remains required.",
+        "what_no_longer_fits": "A one-way instruction will not secure cooperation.",
+        "unsafe_to_miss": "Resistance could delay safe transfer.",
+        "direction": "continue",
+        "action_threshold_change": "unchanged",
+        "required_action_refs": [
+          "ACTION-003"
+        ],
+        "unsafe_rigid_response": "Repeat the instruction without explaining.",
+        "recovery_sentence": "I will explain the risk and what transfer involves."
+      }
+    ],
+    "recovery": {
+      "wrong_path": "Continue the benign clinic pathway.",
+      "exposing_fact_refs": [
+        "FACT-003",
+        "FACT-006"
+      ],
+      "recovery_sentence": "This new information changes the risk, so I am escalating now.",
+      "immediate_action_refs": [
+        "ACTION-001",
+        "ACTION-002"
+      ],
+      "reentry_turn_ref": "TURN-007",
+      "safety_boundary": "Do not delay the predefined escalation."
+    }
+  },
+  "assessment_guide": {
+    "aim": "Test safe synthetic emergency sequencing.",
+    "assessed_domains": [
+      "assessment",
+      "management",
+      "communication"
+    ],
+    "expected_performance": "Recognise, act, explain, and hand over.",
+    "key_issues": [
+      "Threshold recognition.",
+      "Prompt action.",
+      "Clear explanation."
+    ],
+    "critical_errors": [
+      "Delay after threshold."
+    ],
+    "safe_behaviours": [
+      "Acts promptly.",
+      "Explains risk."
+    ],
+    "borderline_behaviours": [
+      "Acts after a brief pause."
+    ],
+    "unsafe_behaviours": [
+      "Waits for definitive proof."
+    ],
+    "hidden_commentary": "Validation fixture only."
+  },
+  "source_governance": {
+    "sources": [
+      {
+        "source_id": "SRC-FIXTURE-001",
+        "title": "Synthetic validation fixture",
+        "issuing_body": "Clinical Pathway test suite",
+        "jurisdiction": "Nonclinical fixture",
+        "date_or_version": "1.0",
+        "exact_location": "Line 1",
+        "claims_supported": [
+          "CLAIM-001",
+          "CLAIM-002"
+        ],
+        "status": "approved",
+        "file_name": "source-fixture.txt",
+        "file_sha256": "1e2b62e19b51989a9ded3c7145bc034a5744c3feb980ed1292c3270d46e0326c",
+        "source_url": "https://example.invalid/clinical-pathway-fixture",
+        "archive_status": "archived",
+        "accessed_date": "2026-07-12"
+      }
+    ],
+    "unresolved_gaps": [],
+    "human_review_questions": [],
+    "claim_coverage_status": "human_approved"
+  },
+  "workflow": {
+    "generation": {
+      "status": "draft_complete",
+      "generator_run_id": "GEN-FIXTURE-001",
+      "generator_identity": "Fixture generator",
+      "generated_at": "2026-07-12"
+    },
+    "structure_audit": "pass",
+    "source_review": "pass",
+    "clinical_review": "pass",
+    "timing_test": "pass",
+    "canonical_case": "locked",
+    "lock_record": {
+      "decision": "locked",
+      "locked_by": "Fixture human reviewer",
+      "locked_date": "2026-07-12",
+      "authoring_payload_hash": "3bb3a78bee70d0dc23b8266b425570515debec695d6b7321194da026224bea0f",
+      "blocking_holds": []
+    },
+    "reviews": {
+      "structure": {
+        "status": "pass",
+        "reviewer_name": "Independent fixture structure auditor",
+        "reviewer_role": "structure auditor",
+        "reviewer_origin": "independent_ai",
+        "review_date": "2026-07-12",
+        "authoring_payload_hash": "3bb3a78bee70d0dc23b8266b425570515debec695d6b7321194da026224bea0f",
+        "findings": []
+      },
+      "source": {
+        "status": "pass",
+        "reviewer_name": "Fixture source reviewer",
+        "reviewer_role": "source reviewer",
+        "reviewer_origin": "human",
+        "review_date": "2026-07-12",
+        "authoring_payload_hash": "3bb3a78bee70d0dc23b8266b425570515debec695d6b7321194da026224bea0f",
+        "findings": []
+      },
+      "clinical": {
+        "status": "pass",
+        "reviewer_name": "Fixture clinical reviewer",
+        "reviewer_role": "clinical safety reviewer",
+        "reviewer_origin": "human",
+        "review_date": "2026-07-12",
+        "authoring_payload_hash": "3bb3a78bee70d0dc23b8266b425570515debec695d6b7321194da026224bea0f",
+        "findings": []
+      },
+      "timing": {
+        "status": "pass",
+        "reviewer_name": "Fixture timing reviewer",
+        "reviewer_role": "human performability reviewer",
+        "reviewer_origin": "human",
+        "review_date": "2026-07-12",
+        "authoring_payload_hash": "3bb3a78bee70d0dc23b8266b425570515debec695d6b7321194da026224bea0f",
+        "findings": []
+      }
+    }
+  },
+  "integrity": {
+    "authoring_payload_hash": "3bb3a78bee70d0dc23b8266b425570515debec695d6b7321194da026224bea0f",
+    "hash_algorithm": "sha256",
+    "authoring_hash_scope": "canonical_content_excluding_workflow_integrity_and_approval_status_fields",
+    "curriculum_entry_hash": "6d3fe0e9c226672e726085c77bd49de0a79a3c317f8331b96c974f4aaa249609",
+    "source_bundle_hash": "a353d0abcd42e93b447390515eabf3ee1fe7096e27b99b1d1ec3e175fecb35ad"
+  }
+}

@@ -1,0 +1,166 @@
+{
+  "registry_version": "2.0.0",
+  "source_authority": "authority/CASE_AUTHORING_STANDARD_v2.md",
+  "grammars": [
+    {
+      "code": "consultation",
+      "label": "Consultation",
+      "sequence": [
+        "focused_history",
+        "synthesis",
+        "explanation",
+        "plan"
+      ],
+      "valid_task_verbs": [
+        "take",
+        "ask",
+        "present",
+        "explain",
+        "discuss",
+        "advise"
+      ]
+    },
+    {
+      "code": "emergency",
+      "label": "Emergency consultation",
+      "sequence": [
+        "recognise_danger",
+        "escalate",
+        "act",
+        "explain_urgency",
+        "handover"
+      ],
+      "valid_task_verbs": [
+        "assess",
+        "identify",
+        "institute",
+        "explain",
+        "present"
+      ]
+    },
+    {
+      "code": "physical_examination",
+      "label": "Physical examination",
+      "sequence": [
+        "consent",
+        "examine",
+        "interpret",
+        "present"
+      ],
+      "valid_task_verbs": [
+        "perform",
+        "demonstrate",
+        "describe",
+        "present",
+        "advise"
+      ]
+    },
+    {
+      "code": "investigation_interpretation",
+      "label": "Investigation interpretation",
+      "sequence": [
+        "identify_test",
+        "read_abnormality",
+        "link_to_patient",
+        "decide_action"
+      ],
+      "valid_task_verbs": [
+        "interpret",
+        "explain",
+        "discuss",
+        "present"
+      ]
+    },
+    {
+      "code": "examiner_presentation",
+      "label": "Examiner presentation",
+      "sequence": [
+        "one_line_summary",
+        "positives",
+        "negatives",
+        "differential",
+        "danger",
+        "plan"
+      ],
+      "valid_task_verbs": [
+        "present",
+        "describe",
+        "answer"
+      ]
+    },
+    {
+      "code": "mse_cognition",
+      "label": "MSE / cognition",
+      "sequence": [
+        "consent",
+        "observe",
+        "assess_risk",
+        "interpret_cautiously",
+        "present"
+      ],
+      "valid_task_verbs": [
+        "perform",
+        "assess",
+        "ask",
+        "present",
+        "explain"
+      ]
+    },
+    {
+      "code": "counselling",
+      "label": "Counselling",
+      "sequence": [
+        "explore_belief",
+        "explain",
+        "check_understanding",
+        "negotiate_safe_plan"
+      ],
+      "valid_task_verbs": [
+        "explain",
+        "discuss",
+        "advise",
+        "counsel",
+        "answer"
+      ]
+    },
+    {
+      "code": "procedure_consent",
+      "label": "Procedure / consent",
+      "sequence": [
+        "indication",
+        "steps",
+        "benefits",
+        "risks",
+        "alternatives",
+        "capacity",
+        "choice"
+      ],
+      "valid_task_verbs": [
+        "explain",
+        "discuss",
+        "obtain",
+        "perform",
+        "demonstrate",
+        "answer"
+      ]
+    },
+    {
+      "code": "student_teaching",
+      "label": "Student teaching",
+      "sequence": [
+        "set_level",
+        "set_goal",
+        "demonstrate",
+        "correct",
+        "check_understanding"
+      ],
+      "valid_task_verbs": [
+        "teach",
+        "explain",
+        "demonstrate",
+        "describe",
+        "answer"
+      ]
+    }
+  ]
+}

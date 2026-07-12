@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://clinical-pathway.local/case-system-v2.0.0/schemas/case-queue.schema.json",
+  "title": "Clinical Pathway generation queue",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "queue_version",
+    "updated_at",
+    "generation_frozen",
+    "items"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "2.0.0"
+    },
+    "queue_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "updated_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "generation_frozen": {
+      "type": "boolean"
+    },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id",
+          "pattern_id",
+          "phase_id",
+          "evolution_slot",
+          "evolution_type",
+          "title",
+          "authorised",
+          "authorised_by",
+          "authorised_at",
+          "authorisation_command",
+          "status",
+          "canonical_path",
+          "reasoning_path",
+          "audit_path",
+          "learner_path"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "pattern": "^CP-P[0-9]{3}-C[0-9]{3}$"
+          },
+          "pattern_id": {
+            "type": "string",
+            "pattern": "^CP-P[0-9]{3}$"
+          },
+          "phase_id": {
+            "enum": [
+              "PHASE-1",
+              "PHASE-2",
+              "PHASE-3",
+              "PHASE-4"
+            ]
+          },
+          "evolution_slot": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 4
+          },
+          "evolution_type": {
+            "enum": [
+              "classic_basic",
+              "dangerous_trap",
+              "benign_looking_mimic",
+              "complex_high_pressure"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "authorised": {
+            "type": "boolean"
+          },
+          "authorised_by": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1
+          },
+          "authorised_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "authorisation_command": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^BUILD_CASE CP-P[0-9]{3}-C[0-9]{3}$"
+          },
+          "status": {
+            "enum": [
+              "not_started",
+              "authorised",
+              "building_case",
+              "case_draft",
+              "case_locked",
+              "building_reasoning",
+              "reasoning_draft",
+              "auditing",
+              "human_review",
+              "study_ready",
+              "blocked"
+            ]
+          },
+          "canonical_path": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "reasoning_path": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "audit_path": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "learner_path": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "registry_version": "2.0.0",
+  "source_authority": "authority/CASE_AUTHORING_STANDARD_v2.md",
+  "phases": [
+    {
+      "phase_id": "PHASE-1",
+      "approved_name": "Critical Emergency Dominance",
+      "confidence_target": "I can keep the patient safe.",
+      "case_job": "Recognise danger, act before certainty, and maintain safe boundaries."
+    },
+    {
+      "phase_id": "PHASE-2",
+      "approved_name": "High Complexity Pattern Mastery",
+      "confidence_target": "I can think when two paths are possible.",
+      "case_job": "Compare mimics, use red flags, and update safely."
+    },
+    {
+      "phase_id": "PHASE-3",
+      "approved_name": "Communication and Risk Stations",
+      "confidence_target": "I can communicate risk safely.",
+      "case_job": "Use words to reduce risk, protect autonomy, and handle emotion or resistance."
+    },
+    {
+      "phase_id": "PHASE-4",
+      "approved_name": "Examination Performance",
+      "confidence_target": "I can perform, interpret, and present cleanly.",
+      "case_job": "Execute the station-specific task and communicate its meaning."
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "fixture_only": true,
+  "checks": {
+    "home_surface": true,
+    "stem_title": true,
+    "task_count": true,
+    "two_clock_maps": true,
+    "hint_expands": true,
+    "progress_changes_without_loss": true,
+    "script_turn_count": true,
+    "decision_hint_displayed": true,
+    "mobile_navigation_opens": true,
+    "mobile_menu_accessible_state": true,
+    "console_errors_absent": true,
+    "page_errors_absent": true
+  },
+  "console_errors": [],
+  "page_errors": []
+}

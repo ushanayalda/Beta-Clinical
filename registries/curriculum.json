@@ -1,0 +1,1932 @@
+{
+  "schema_version": "2.0.0",
+  "registry_version": "2.0.0",
+  "purpose": "Operational case map. It selects work but does not supply clinical truth or approval.",
+  "selection_policy": {
+    "manual_form_required": false,
+    "explicit_command_required": true,
+    "default_command": "BUILD_CASE <case_id>",
+    "duplicate_rule": "A new case must add a distinct station contract, surprise, failure pattern, action threshold, or transfer target.",
+    "clinical_release_default": "hold"
+  },
+  "phases": [
+    {
+      "phase_id": "PHASE-1",
+      "phase_number": 1,
+      "label": "Critical Emergency Dominance",
+      "control_title": "Emergency danger recognition",
+      "confidence_target": "Keep the patient safe before the exact diagnosis is known",
+      "pattern_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "phase_id": "PHASE-2",
+      "phase_number": 2,
+      "label": "High Complexity Pattern Mastery",
+      "control_title": "Common GP and medicine stations",
+      "confidence_target": "Handle overlap, uncertainty, and changing evidence",
+      "pattern_numbers": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "phase_id": "PHASE-3",
+      "phase_number": 3,
+      "label": "Communication and Risk",
+      "control_title": "Communication, psychiatry, paediatrics, and women's health",
+      "confidence_target": "Communicate safely through emotion, risk, and conflict",
+      "pattern_numbers": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "phase_id": "PHASE-4",
+      "phase_number": 4,
+      "label": "Examination Performance",
+      "control_title": "Mixed complex AMC stations",
+      "confidence_target": "Perform, observe, interpret, teach, and present",
+      "pattern_numbers": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    }
+  ],
+  "patterns": [
+    {
+      "pattern_id": "CP-P001",
+      "pattern_number": 1,
+      "phase_id": "PHASE-1",
+      "title": "Dangerous chest pain",
+      "slug": "dangerous-chest-pain",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P001-C001",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P001-C002",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P001-C003",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P001-C004",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P002",
+      "pattern_number": 2,
+      "phase_id": "PHASE-1",
+      "title": "Acute breathlessness",
+      "slug": "acute-breathlessness",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P002-C005",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P002-C006",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P002-C007",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P002-C008",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P003",
+      "pattern_number": 3,
+      "phase_id": "PHASE-1",
+      "title": "Collapse syncope and shock",
+      "slug": "collapse-syncope-and-shock",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P003-C009",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P003-C010",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P003-C011",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P003-C012",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P004",
+      "pattern_number": 4,
+      "phase_id": "PHASE-1",
+      "title": "Severe abdominal pain",
+      "slug": "severe-abdominal-pain",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P004-C013",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P004-C014",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P004-C015",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P004-C016",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P005",
+      "pattern_number": 5,
+      "phase_id": "PHASE-1",
+      "title": "Fever sepsis and meningitis",
+      "slug": "fever-sepsis-and-meningitis",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P005-C017",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P005-C018",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P005-C019",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P005-C020",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P006",
+      "pattern_number": 6,
+      "phase_id": "PHASE-1",
+      "title": "Neurological emergencies",
+      "slug": "neurological-emergencies",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P006-C021",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P006-C022",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P006-C023",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P006-C024",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P007",
+      "pattern_number": 7,
+      "phase_id": "PHASE-1",
+      "title": "Pregnancy and obstetric emergencies",
+      "slug": "pregnancy-and-obstetric-emergencies",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P007-C025",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P007-C026",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P007-C027",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P007-C028",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P008",
+      "pattern_number": 8,
+      "phase_id": "PHASE-1",
+      "title": "Paediatric red flags",
+      "slug": "paediatric-red-flags",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P008-C029",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P008-C030",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P008-C031",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P008-C032",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P009",
+      "pattern_number": 9,
+      "phase_id": "PHASE-1",
+      "title": "Mental health crisis and safety",
+      "slug": "mental-health-crisis-and-safety",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P009-C033",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P009-C034",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P009-C035",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P009-C036",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P010",
+      "pattern_number": 10,
+      "phase_id": "PHASE-1",
+      "title": "Trauma and acute injury",
+      "slug": "trauma-and-acute-injury",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P010-C037",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P010-C038",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P010-C039",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P010-C040",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P011",
+      "pattern_number": 11,
+      "phase_id": "PHASE-2",
+      "title": "Chronic disease risk and prevention",
+      "slug": "chronic-disease-risk-and-prevention",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P011-C041",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P011-C042",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P011-C043",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P011-C044",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P012",
+      "pattern_number": 12,
+      "phase_id": "PHASE-2",
+      "title": "Hypertension and cardiovascular risk",
+      "slug": "hypertension-and-cardiovascular-risk",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P012-C045",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P012-C046",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P012-C047",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P012-C048",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P013",
+      "pattern_number": 13,
+      "phase_id": "PHASE-2",
+      "title": "Diabetes and metabolic medicine",
+      "slug": "diabetes-and-metabolic-medicine",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P013-C049",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P013-C050",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P013-C051",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P013-C052",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P014",
+      "pattern_number": 14,
+      "phase_id": "PHASE-2",
+      "title": "Respiratory medicine",
+      "slug": "respiratory-medicine",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P014-C053",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P014-C054",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P014-C055",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P014-C056",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P015",
+      "pattern_number": 15,
+      "phase_id": "PHASE-2",
+      "title": "Gastroenterology and liver",
+      "slug": "gastroenterology-and-liver",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P015-C057",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P015-C058",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P015-C059",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P015-C060",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P016",
+      "pattern_number": 16,
+      "phase_id": "PHASE-2",
+      "title": "Renal and urology",
+      "slug": "renal-and-urology",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P016-C061",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P016-C062",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P016-C063",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P016-C064",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P017",
+      "pattern_number": 17,
+      "phase_id": "PHASE-2",
+      "title": "Musculoskeletal and rheumatology",
+      "slug": "musculoskeletal-and-rheumatology",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P017-C065",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P017-C066",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P017-C067",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P017-C068",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P018",
+      "pattern_number": 18,
+      "phase_id": "PHASE-2",
+      "title": "Dermatology and lumps",
+      "slug": "dermatology-and-lumps",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P018-C069",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P018-C070",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P018-C071",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P018-C072",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P019",
+      "pattern_number": 19,
+      "phase_id": "PHASE-2",
+      "title": "ENT eye and oral",
+      "slug": "ent-eye-and-oral",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P019-C073",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P019-C074",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P019-C075",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P019-C076",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P020",
+      "pattern_number": 20,
+      "phase_id": "PHASE-2",
+      "title": "Haematology and abnormal tests",
+      "slug": "haematology-and-abnormal-tests",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P020-C077",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P020-C078",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P020-C079",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P020-C080",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P021",
+      "pattern_number": 21,
+      "phase_id": "PHASE-3",
+      "title": "Mental state and behavioural risk",
+      "slug": "mental-state-and-behavioural-risk",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P021-C081",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P021-C082",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P021-C083",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P021-C084",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P022",
+      "pattern_number": 22,
+      "phase_id": "PHASE-3",
+      "title": "Depression anxiety and somatic symptoms",
+      "slug": "depression-anxiety-and-somatic-symptoms",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P022-C085",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P022-C086",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P022-C087",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P022-C088",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P023",
+      "pattern_number": 23,
+      "phase_id": "PHASE-3",
+      "title": "Substance use and medication dependence",
+      "slug": "substance-use-and-medication-dependence",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P023-C089",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P023-C090",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P023-C091",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P023-C092",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P024",
+      "pattern_number": 24,
+      "phase_id": "PHASE-3",
+      "title": "Paediatric consultation and development",
+      "slug": "paediatric-consultation-and-development",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P024-C093",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P024-C094",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P024-C095",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P024-C096",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P025",
+      "pattern_number": 25,
+      "phase_id": "PHASE-3",
+      "title": "Adolescent health and family",
+      "slug": "adolescent-health-and-family",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P025-C097",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P025-C098",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P025-C099",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P025-C100",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P026",
+      "pattern_number": 26,
+      "phase_id": "PHASE-3",
+      "title": "Obstetric consultation",
+      "slug": "obstetric-consultation",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P026-C101",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P026-C102",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P026-C103",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P026-C104",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P027",
+      "pattern_number": 27,
+      "phase_id": "PHASE-3",
+      "title": "Gynaecology and sexual health",
+      "slug": "gynaecology-and-sexual-health",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P027-C105",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P027-C106",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P027-C107",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P027-C108",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P028",
+      "pattern_number": 28,
+      "phase_id": "PHASE-3",
+      "title": "Breast and cancer screening",
+      "slug": "breast-and-cancer-screening",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P028-C109",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P028-C110",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P028-C111",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P028-C112",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P029",
+      "pattern_number": 29,
+      "phase_id": "PHASE-3",
+      "title": "Ethics consent and confidentiality",
+      "slug": "ethics-consent-and-confidentiality",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P029-C113",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P029-C114",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P029-C115",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P029-C116",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P030",
+      "pattern_number": 30,
+      "phase_id": "PHASE-3",
+      "title": "Bad news shared decision and cultural safety",
+      "slug": "bad-news-shared-decision-and-cultural-safety",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P030-C117",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P030-C118",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P030-C119",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P030-C120",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P031",
+      "pattern_number": 31,
+      "phase_id": "PHASE-4",
+      "title": "Physical examination stations",
+      "slug": "physical-examination-stations",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P031-C121",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P031-C122",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P031-C123",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P031-C124",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P032",
+      "pattern_number": 32,
+      "phase_id": "PHASE-4",
+      "title": "Investigation interpretation stations",
+      "slug": "investigation-interpretation-stations",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P032-C125",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P032-C126",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P032-C127",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P032-C128",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P033",
+      "pattern_number": 33,
+      "phase_id": "PHASE-4",
+      "title": "Examiner presentation and PEFE",
+      "slug": "examiner-presentation-and-pefe",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P033-C129",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P033-C130",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P033-C131",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P033-C132",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P034",
+      "pattern_number": 34,
+      "phase_id": "PHASE-4",
+      "title": "Student teaching stations",
+      "slug": "student-teaching-stations",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P034-C133",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P034-C134",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P034-C135",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P034-C136",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P035",
+      "pattern_number": 35,
+      "phase_id": "PHASE-4",
+      "title": "Procedure and consent stations",
+      "slug": "procedure-and-consent-stations",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P035-C137",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P035-C138",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P035-C139",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P035-C140",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P036",
+      "pattern_number": 36,
+      "phase_id": "PHASE-4",
+      "title": "Postoperative and ward calls",
+      "slug": "postoperative-and-ward-calls",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P036-C141",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P036-C142",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P036-C143",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P036-C144",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P037",
+      "pattern_number": 37,
+      "phase_id": "PHASE-4",
+      "title": "Elderly frailty falls and cognition",
+      "slug": "elderly-frailty-falls-and-cognition",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P037-C145",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P037-C146",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P037-C147",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P037-C148",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P038",
+      "pattern_number": 38,
+      "phase_id": "PHASE-4",
+      "title": "Indigenous rural and resource-limited care",
+      "slug": "indigenous-rural-and-resource-limited-care",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P038-C149",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P038-C150",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P038-C151",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P038-C152",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P039",
+      "pattern_number": 39,
+      "phase_id": "PHASE-4",
+      "title": "Integrated diagnosis and management",
+      "slug": "integrated-diagnosis-and-management",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P039-C153",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P039-C154",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P039-C155",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P039-C156",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    },
+    {
+      "pattern_id": "CP-P040",
+      "pattern_number": 40,
+      "phase_id": "PHASE-4",
+      "title": "Trial mixed station sets",
+      "slug": "trial-mixed-station-sets",
+      "status": "operational_map",
+      "case_slots": [
+        {
+          "case_id": "CP-P040-C157",
+          "evolution_slot": 1,
+          "evolution_type": "classic_basic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P040-C158",
+          "evolution_slot": 2,
+          "evolution_type": "dangerous_trap",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P040-C159",
+          "evolution_slot": 3,
+          "evolution_type": "benign_looking_mimic",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        },
+        {
+          "case_id": "CP-P040-C160",
+          "evolution_slot": 4,
+          "evolution_type": "complex_high_pressure",
+          "authoring_status": "not_started",
+          "clinical_status": "not_reviewed",
+          "release_status": "hold",
+          "generation_requires_explicit_command": true
+        }
+      ]
+    }
+  ]
+}

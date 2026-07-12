@@ -1,0 +1,593 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://clinical-pathway.local/case-system-v2.0.0/schemas/audit-report.schema.json",
+  "title": "Clinical Pathway independent system audit report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "case_id",
+    "case_version",
+    "audit_report_id",
+    "curriculum_entry_hash",
+    "source_bundle_hash",
+    "registry_version",
+    "registry_hash",
+    "canonical_case_hash",
+    "reasoning_layer_hash",
+    "generator_run_ids",
+    "auditor_run_id",
+    "auditor_identity",
+    "auditor_origin",
+    "independence_basis",
+    "audited_at",
+    "checks",
+    "findings",
+    "repairs_applied",
+    "rerun_status",
+    "final_status",
+    "integrity"
+  ],
+  "$defs": {
+    "semver": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "hash": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "nonempty": {
+      "type": "string",
+      "minLength": 1
+    },
+    "case_id": {
+      "type": "string",
+      "pattern": "^CP-P[0-9]{3}-C[0-9]{3}$"
+    },
+    "phase_id": {
+      "enum": [
+        "PHASE-1",
+        "PHASE-2",
+        "PHASE-3",
+        "PHASE-4"
+      ]
+    },
+    "classification": {
+      "enum": [
+        "core",
+        "reserve",
+        "expansion"
+      ]
+    },
+    "station_grammar": {
+      "enum": [
+        "consultation",
+        "emergency",
+        "physical_examination",
+        "investigation_interpretation",
+        "examiner_presentation",
+        "mse_cognition",
+        "counselling",
+        "procedure_consent",
+        "student_teaching"
+      ]
+    },
+    "failure_mode": {
+      "enum": [
+        "premature_closure",
+        "unsafe_delay",
+        "station_mismatch",
+        "cognitive_overload",
+        "communication_breakdown",
+        "rigidity",
+        "performance_freeze"
+      ]
+    },
+    "review_status": {
+      "enum": [
+        "not_started",
+        "assigned",
+        "changes_required",
+        "blocked",
+        "pass"
+      ]
+    },
+    "workflow_status": {
+      "enum": [
+        "hold",
+        "draft",
+        "changes_required",
+        "blocked",
+        "pass"
+      ]
+    },
+    "source_ref": {
+      "type": "string",
+      "pattern": "^SRC-[A-Z0-9-]{3,40}$"
+    },
+    "task_ref": {
+      "type": "string",
+      "pattern": "^TASK-[0-9]{3}$"
+    },
+    "stem_ref": {
+      "type": "string",
+      "pattern": "^STEM-[0-9]{3}$"
+    },
+    "fact_ref": {
+      "type": "string",
+      "pattern": "^FACT-[0-9]{3}$"
+    },
+    "finding_ref": {
+      "type": "string",
+      "pattern": "^FIND-[0-9]{3}$"
+    },
+    "action_ref": {
+      "type": "string",
+      "pattern": "^ACTION-[0-9]{3}$"
+    },
+    "decision_ref": {
+      "type": "string",
+      "pattern": "^DEC-[0-9]{3}$"
+    },
+    "turn_ref": {
+      "type": "string",
+      "pattern": "^TURN-[0-9]{3}$"
+    },
+    "flex_ref": {
+      "type": "string",
+      "pattern": "^FLEX-[0-9]{3}$"
+    },
+    "claim_ref": {
+      "type": "string",
+      "pattern": "^CLAIM-[0-9]{3}$"
+    },
+    "reasoning_target_ref": {
+      "type": "string",
+      "pattern": "^(STEM|TASK|TURN|ACTION|DEC)-[0-9]{3}$"
+    }
+  },
+  "properties": {
+    "schema_version": {
+      "const": "2.0.0"
+    },
+    "case_id": {
+      "$ref": "#/$defs/case_id"
+    },
+    "case_version": {
+      "$ref": "#/$defs/semver"
+    },
+    "canonical_case_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "reasoning_layer_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "generator_run_ids": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "auditor_run_id": {
+      "$ref": "#/$defs/nonempty"
+    },
+    "auditor_identity": {
+      "$ref": "#/$defs/nonempty"
+    },
+    "auditor_origin": {
+      "enum": [
+        "independent_ai",
+        "human"
+      ]
+    },
+    "independence_basis": {
+      "$ref": "#/$defs/nonempty"
+    },
+    "audited_at": {
+      "$ref": "#/$defs/date"
+    },
+    "checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_validation",
+        "stable_id_uniqueness",
+        "cross_reference_resolution",
+        "curriculum_entry_binding",
+        "canonical_hash_binding",
+        "reasoning_hash_binding",
+        "task_snapshot_exactness",
+        "task_coverage",
+        "hint_target_resolution",
+        "logic_turn_resolution",
+        "clock_contiguity",
+        "clock_task_alignment",
+        "clinical_chronology",
+        "causal_accuracy",
+        "emergency_priority",
+        "medication_support",
+        "answer_leakage",
+        "cognitive_load",
+        "neuroaffirming_language",
+        "cross_case_consistency",
+        "source_traceability",
+        "learner_export_boundary",
+        "human_review_boundary",
+        "source_file_integrity",
+        "source_bundle_binding",
+        "registry_binding",
+        "review_hash_binding",
+        "display_attachment_binding",
+        "website_accessibility_boundary"
+      ],
+      "properties": {
+        "schema_validation": {
+          "enum": [
+            "pass",
+            "changes_required",
+            "blocked",
+            "hold"
+          ]
+        },
+        "stable_id_uniqueness": {
+          "enum": [
+            "pass",
+            "changes_required",
+            "blocked",
+            "hold"
+          ]
+        },
+        "cross_reference_resolution": {
+          "enum": [
+            "pass",
+            "changes_required",
+            "blocked",
+            "hold"
+          ]
+        },
+        "canonical_hash_binding": {
+          "enum": [
+            "pass",
+            "changes_required",
+            "blocked",
+            "hold"
+          ]
+        },
+        "reasoning_hash_binding": {
+          "enum": [
+            "pass",
+            "changes_required",
+            "blocked",
+            "hold"
+          ]
+        },
+        "task_snapshot_exactness": {
+          "enum": [
+            "pass",
+            "changes_required",
+            "blocked",
+            "hold"
+          ]
+        },
+        "task_coverage": {
+          "enum": [
+            "pass",
+            "changes_required",
+            "blocked",
+            "hold"
+          ]
+        },
+        "hint_target_resolution": {
+          "enum": [
+            "pass",
+            "changes_required",
+            "blocked",
+            "hold"
+          ]
+        },
+        "logic_turn_resolution": {
+          "enum": [
+            "pass",
+            "changes_required",
+            "blocked",
+            "hold"
+          ]
+        },
+        "clock_contiguity": {
+          "enum": [
+            "pass",
+            "changes_required",
+            "blocked",
+            "hold"
+          ]
+        },
+        "clock_task_alignment": {
+          "enum": [
+            "pass",
+            "changes_required",
+            "blocked",
+            "hold"
+          ]
+        },
+        "clinical_chronology": {
+          "enum": [
+            "pass",
+            "changes_required",
+            "blocked",
+            "hold"
+          ]
+        },
+        "causal_accuracy": {
+          "enum": [
+            "pass",
+            "changes_required",
+            "blocked",
+            "hold"
+          ]
+        },
+        "emergency_priority": {
+          "enum": [
+            "pass",
+            "changes_required",
+            "blocked",
+            "hold"
+          ]
+        },
+        "medication_support": {
+          "enum": [
+            "pass",
+            "changes_required",
+            "blocked",
+            "hold"
+          ]
+        },
+        "answer_leakage": {
+          "enum": [
+            "pass",
+            "changes_required",
+            "blocked",
+            "hold"
+          ]
+        },
+        "cognitive_load": {
+          "enum": [
+            "pass",
+            "changes_required",
+            "blocked",
+            "hold"
+          ]
+        },
+        "neuroaffirming_language": {
+          "enum": [
+            "pass",
+            "changes_required",
+            "blocked",
+            "hold"
+          ]
+        },
+        "cross_case_consistency": {
+          "enum": [
+            "pass",
+            "changes_required",
+            "blocked",
+            "hold"
+          ]
+        },
+        "source_traceability": {
+          "enum": [
+            "pass",
+            "changes_required",
+            "blocked",
+            "hold"
+          ]
+        },
+        "learner_export_boundary": {
+          "enum": [
+            "pass",
+            "changes_required",
+            "blocked",
+            "hold"
+          ],
+          "description": "Pre-export audit of the learner-export schema and deterministic hidden-layer exclusion contract. Actual learner JSON is validated after approval."
+        },
+        "human_review_boundary": {
+          "enum": [
+            "pass",
+            "changes_required",
+            "blocked",
+            "hold"
+          ]
+        },
+        "source_file_integrity": {
+          "enum": [
+            "pass",
+            "changes_required",
+            "blocked",
+            "hold"
+          ]
+        },
+        "registry_binding": {
+          "enum": [
+            "pass",
+            "changes_required",
+            "blocked",
+            "hold"
+          ]
+        },
+        "review_hash_binding": {
+          "enum": [
+            "pass",
+            "changes_required",
+            "blocked",
+            "hold"
+          ]
+        },
+        "display_attachment_binding": {
+          "enum": [
+            "pass",
+            "changes_required",
+            "blocked",
+            "hold"
+          ],
+          "description": "Pre-export proof that every Hint target resolves to one learner display location, including ACTION and DEC targets mapped to real Gold Run turns."
+        },
+        "website_accessibility_boundary": {
+          "enum": [
+            "pass",
+            "changes_required",
+            "blocked",
+            "hold"
+          ],
+          "description": "Audit of the static renderer contract and package browser-smoke baseline. Case-specific learner JSON is validated separately after export."
+        },
+        "curriculum_entry_binding": {
+          "enum": [
+            "pass",
+            "changes_required",
+            "blocked",
+            "hold"
+          ]
+        },
+        "source_bundle_binding": {
+          "enum": [
+            "pass",
+            "changes_required",
+            "blocked",
+            "hold"
+          ]
+        }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "finding_id",
+          "severity",
+          "section",
+          "exact_ref",
+          "risk",
+          "earliest_faulty_layer",
+          "required_fix",
+          "status"
+        ],
+        "properties": {
+          "finding_id": {
+            "type": "string",
+            "pattern": "^FINDING-[0-9]{3}$"
+          },
+          "severity": {
+            "enum": [
+              "low",
+              "moderate",
+              "high",
+              "critical"
+            ]
+          },
+          "section": {
+            "$ref": "#/$defs/nonempty"
+          },
+          "exact_ref": {
+            "$ref": "#/$defs/nonempty"
+          },
+          "risk": {
+            "$ref": "#/$defs/nonempty"
+          },
+          "earliest_faulty_layer": {
+            "$ref": "#/$defs/nonempty"
+          },
+          "required_fix": {
+            "$ref": "#/$defs/nonempty"
+          },
+          "status": {
+            "enum": [
+              "open",
+              "resolved",
+              "accepted_hold"
+            ]
+          }
+        }
+      }
+    },
+    "repairs_applied": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "rerun_status": {
+      "enum": [
+        "not_run",
+        "pass",
+        "changes_required",
+        "blocked"
+      ]
+    },
+    "final_status": {
+      "enum": [
+        "pass_to_human_review",
+        "changes_required",
+        "blocked"
+      ]
+    },
+    "audit_report_id": {
+      "type": "string",
+      "pattern": "^AUDIT-[A-Z0-9-]{3,60}$"
+    },
+    "registry_version": {
+      "$ref": "#/$defs/semver"
+    },
+    "registry_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "audit_report_hash",
+        "hash_algorithm",
+        "hash_scope"
+      ],
+      "properties": {
+        "audit_report_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "hash_algorithm": {
+          "const": "sha256"
+        },
+        "hash_scope": {
+          "const": "full_audit_report_excluding_integrity.audit_report_hash"
+        }
+      }
+    },
+    "curriculum_entry_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "source_bundle_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

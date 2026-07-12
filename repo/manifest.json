@@ -1,0 +1,15 @@
+{
+  "repository_schema_version": "2.0.0",
+  "project": "Clinical Pathway",
+  "current_reasoning_registry_version": "1.0.0",
+  "current_reasoning_registry_file": "registry/master-reasoning-registry.json",
+  "cases": [],
+  "last_updated": null,
+  "updated_by": null,
+  "registry_snapshots": [],
+  "curriculum_version": "2.0.0",
+  "curriculum_file": "../registries/curriculum.json",
+  "queue_version": "2.0.0",
+  "queue_file": "queue/case-queue.json",
+  "generation_frozen": true
+}

@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://clinical-pathway.local/case-system-v2.0.0/schemas/learner-index.schema.json",
+  "title": "Website learner index",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "generated_at",
+    "phases",
+    "cases"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "2.0.0"
+    },
+    "generated_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "phases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "phase_id",
+          "label",
+          "patterns"
+        ],
+        "properties": {
+          "phase_id": {
+            "enum": [
+              "PHASE-1",
+              "PHASE-2",
+              "PHASE-3",
+              "PHASE-4"
+            ]
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1
+          },
+          "patterns": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "label",
+                "cases"
+              ],
+              "properties": {
+                "label": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "cases": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "case_id",
+                      "title",
+                      "file"
+                    ],
+                    "properties": {
+                      "case_id": {
+                        "type": "string",
+                        "pattern": "^CP-P[0-9]{3}-C[0-9]{3}$"
+                      },
+                      "title": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "file": {
+                        "type": "string",
+                        "pattern": "^data/[A-Za-z0-9._-]+\\.json$"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "cases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id",
+          "title",
+          "file",
+          "phase_id",
+          "pattern_label"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "pattern": "^CP-P[0-9]{3}-C[0-9]{3}$"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "file": {
+            "type": "string",
+            "pattern": "^data/[A-Za-z0-9._-]+\\.json$"
+          },
+          "phase_id": {
+            "enum": [
+              "PHASE-1",
+              "PHASE-2",
+              "PHASE-3",
+              "PHASE-4"
+            ]
+          },
+          "pattern_label": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}

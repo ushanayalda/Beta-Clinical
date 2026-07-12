@@ -1,0 +1,17 @@
+{
+  "schema_version": "2.0.0",
+  "response_type": "HOLD_REPORT",
+  "operation": "PREFLIGHT",
+  "case_id": "CP-P001-C001",
+  "status": "hold",
+  "generation_performed": false,
+  "blocking_reasons": [
+    "Missing approved source."
+  ],
+  "missing_fields": [
+    "sources[0]"
+  ],
+  "conflicts": [],
+  "unsupported_claims": [],
+  "next_authorised_action": "Attach the named source file."
+}

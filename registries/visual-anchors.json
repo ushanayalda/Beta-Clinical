@@ -1,0 +1,80 @@
+{
+  "registry_version": "2.0.0",
+  "policy": {
+    "purpose": "Recognise task scope quickly under pressure.",
+    "rules": [
+      "One anchor has one stable meaning.",
+      "Anchor text remains available for accessibility.",
+      "Colour is never the only carrier of meaning.",
+      "Anchors guide scope; they do not reveal the diagnosis."
+    ]
+  },
+  "anchors": [
+    {
+      "anchor_id": "ANCHOR-HX-FOCUSED",
+      "label": "Focused history",
+      "symbol": "🔎",
+      "meaning": "Ask only what changes safety, synthesis, or the next task."
+    },
+    {
+      "anchor_id": "ANCHOR-HX-FULL",
+      "label": "Full history",
+      "symbol": "🧺",
+      "meaning": "Cover all relevant history domains without losing the presenting problem."
+    },
+    {
+      "anchor_id": "ANCHOR-EXAM",
+      "label": "Examination",
+      "symbol": "🩺",
+      "meaning": "Consent, examine, interpret, and present."
+    },
+    {
+      "anchor_id": "ANCHOR-INV",
+      "label": "Investigation",
+      "symbol": "🧪",
+      "meaning": "Identify, interpret, connect, and act."
+    },
+    {
+      "anchor_id": "ANCHOR-DX-ONE",
+      "label": "One diagnosis",
+      "symbol": "🎯",
+      "meaning": "Give one best diagnosis when the task requests one."
+    },
+    {
+      "anchor_id": "ANCHOR-DDX",
+      "label": "Differentials",
+      "symbol": "🌿",
+      "meaning": "Rank alternatives by likelihood and danger."
+    },
+    {
+      "anchor_id": "ANCHOR-MX",
+      "label": "Management",
+      "symbol": "🧭",
+      "meaning": "State immediate, subsequent, disposition, and safety-net actions."
+    },
+    {
+      "anchor_id": "ANCHOR-IMMEDIATE",
+      "label": "Immediate action",
+      "symbol": "🚨",
+      "meaning": "Act when the safety threshold is crossed."
+    },
+    {
+      "anchor_id": "ANCHOR-CONCERN",
+      "label": "Patient concern",
+      "symbol": "💬",
+      "meaning": "Address the concern underneath the question."
+    },
+    {
+      "anchor_id": "ANCHOR-PRESENT",
+      "label": "Present",
+      "symbol": "📣",
+      "meaning": "Give meaning and priority, not a chronological replay."
+    },
+    {
+      "anchor_id": "ANCHOR-TIME",
+      "label": "Internal clock",
+      "symbol": "◴",
+      "meaning": "Use planned transition points, not exact counting."
+    }
+  ]
+}

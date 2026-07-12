@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://clinical-pathway.local/case-system-v2.0.0/schemas/audit-response.schema.json",
+  "title": "Independent Audit GPT response",
+  "oneOf": [
+    {
+      "$ref": "audit-report.schema.json"
+    },
+    {
+      "$ref": "hold-report.schema.json"
+    }
+  ]
+}

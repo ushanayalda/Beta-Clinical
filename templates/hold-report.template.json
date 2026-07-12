@@ -1,0 +1,15 @@
+{
+  "schema_version": "2.0.0",
+  "response_type": "HOLD_REPORT",
+  "operation": "PREFLIGHT",
+  "case_id": null,
+  "status": "hold",
+  "generation_performed": false,
+  "blocking_reasons": [
+    "State the exact blocking reason."
+  ],
+  "missing_fields": [],
+  "conflicts": [],
+  "unsupported_claims": [],
+  "next_authorised_action": "Supply only the named missing dependency."
+}

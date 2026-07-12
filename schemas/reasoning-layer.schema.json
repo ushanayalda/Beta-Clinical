@@ -1,0 +1,1215 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://clinical-pathway.local/case-system-v2.0.0/schemas/reasoning-layer.schema.json",
+  "title": "Clinical Pathway ADHD-oriented reasoning layer",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "case_id",
+    "case_version",
+    "reasoning_version",
+    "canonical_case_hash",
+    "registry_version",
+    "registry_hash",
+    "source_bundle_hash",
+    "task_snapshot",
+    "reading_clock",
+    "performance_clock",
+    "reasoning_nodes",
+    "logic_track",
+    "attention_traps",
+    "safety_pins",
+    "visual_anchors",
+    "registry_patch",
+    "quality_gates",
+    "workflow",
+    "integrity"
+  ],
+  "$defs": {
+    "semver": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "hash": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "nonempty": {
+      "type": "string",
+      "minLength": 1
+    },
+    "case_id": {
+      "type": "string",
+      "pattern": "^CP-P[0-9]{3}-C[0-9]{3}$"
+    },
+    "phase_id": {
+      "enum": [
+        "PHASE-1",
+        "PHASE-2",
+        "PHASE-3",
+        "PHASE-4"
+      ]
+    },
+    "classification": {
+      "enum": [
+        "core",
+        "reserve",
+        "expansion"
+      ]
+    },
+    "station_grammar": {
+      "enum": [
+        "consultation",
+        "emergency",
+        "physical_examination",
+        "investigation_interpretation",
+        "examiner_presentation",
+        "mse_cognition",
+        "counselling",
+        "procedure_consent",
+        "student_teaching"
+      ]
+    },
+    "failure_mode": {
+      "enum": [
+        "premature_closure",
+        "unsafe_delay",
+        "station_mismatch",
+        "cognitive_overload",
+        "communication_breakdown",
+        "rigidity",
+        "performance_freeze"
+      ]
+    },
+    "review_status": {
+      "enum": [
+        "not_started",
+        "assigned",
+        "changes_required",
+        "blocked",
+        "pass"
+      ]
+    },
+    "workflow_status": {
+      "enum": [
+        "hold",
+        "draft",
+        "changes_required",
+        "blocked",
+        "pass"
+      ]
+    },
+    "source_ref": {
+      "type": "string",
+      "pattern": "^SRC-[A-Z0-9-]{3,40}$"
+    },
+    "task_ref": {
+      "type": "string",
+      "pattern": "^TASK-[0-9]{3}$"
+    },
+    "stem_ref": {
+      "type": "string",
+      "pattern": "^STEM-[0-9]{3}$"
+    },
+    "fact_ref": {
+      "type": "string",
+      "pattern": "^FACT-[0-9]{3}$"
+    },
+    "finding_ref": {
+      "type": "string",
+      "pattern": "^FIND-[0-9]{3}$"
+    },
+    "action_ref": {
+      "type": "string",
+      "pattern": "^ACTION-[0-9]{3}$"
+    },
+    "decision_ref": {
+      "type": "string",
+      "pattern": "^DEC-[0-9]{3}$"
+    },
+    "turn_ref": {
+      "type": "string",
+      "pattern": "^TURN-[0-9]{3}$"
+    },
+    "flex_ref": {
+      "type": "string",
+      "pattern": "^FLEX-[0-9]{3}$"
+    },
+    "claim_ref": {
+      "type": "string",
+      "pattern": "^CLAIM-[0-9]{3}$"
+    },
+    "reasoning_target_ref": {
+      "type": "string",
+      "pattern": "^(STEM|TASK|TURN|ACTION|DEC)-[0-9]{3}$"
+    }
+  },
+  "properties": {
+    "schema_version": {
+      "const": "2.0.0"
+    },
+    "case_id": {
+      "$ref": "#/$defs/case_id"
+    },
+    "case_version": {
+      "$ref": "#/$defs/semver"
+    },
+    "reasoning_version": {
+      "$ref": "#/$defs/semver"
+    },
+    "canonical_case_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "registry_version": {
+      "$ref": "#/$defs/semver"
+    },
+    "registry_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "task_snapshot": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "task_ref",
+          "source_task_text",
+          "plain_scope",
+          "anchor_id",
+          "time_budget_seconds",
+          "completion_signal"
+        ],
+        "properties": {
+          "task_ref": {
+            "$ref": "#/$defs/task_ref"
+          },
+          "plain_scope": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "anchor_id": {
+            "type": "string",
+            "pattern": "^ANCHOR-[A-Z0-9-]{2,40}$"
+          },
+          "time_budget_seconds": {
+            "type": "integer",
+            "minimum": 20,
+            "maximum": 420
+          },
+          "completion_signal": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "source_task_text": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "reading_clock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "total_seconds",
+        "segments"
+      ],
+      "properties": {
+        "total_seconds": {
+          "const": 120
+        },
+        "segments": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 6,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "clock_id",
+              "start_second",
+              "end_second",
+              "label",
+              "focus",
+              "target_refs"
+            ],
+            "properties": {
+              "clock_id": {
+                "type": "string",
+                "pattern": "^CLOCK-[0-9]{3}$"
+              },
+              "start_second": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 119
+              },
+              "end_second": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 120
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 30
+              },
+              "focus": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 120
+              },
+              "target_refs": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/$defs/reasoning_target_ref"
+                },
+                "uniqueItems": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "performance_clock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "total_seconds",
+        "segments"
+      ],
+      "properties": {
+        "total_seconds": {
+          "const": 480
+        },
+        "segments": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "clock_id",
+              "start_second",
+              "end_second",
+              "label",
+              "task_refs",
+              "move_on_signal"
+            ],
+            "properties": {
+              "clock_id": {
+                "type": "string",
+                "pattern": "^CLOCK-[0-9]{3}$"
+              },
+              "start_second": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 479
+              },
+              "end_second": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 480
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 30
+              },
+              "task_refs": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/$defs/task_ref"
+                },
+                "uniqueItems": true
+              },
+              "move_on_signal": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 120
+              }
+            }
+          }
+        }
+      }
+    },
+    "reasoning_nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "node_id",
+          "target_ref",
+          "hint_id",
+          "hint_type",
+          "visible_hint",
+          "observe",
+          "connect",
+          "mechanism",
+          "clinical_weight",
+          "next_thought",
+          "causal_chain",
+          "concept_refs",
+          "claim_refs",
+          "source_refs",
+          "answer_leakage_status"
+        ],
+        "properties": {
+          "node_id": {
+            "type": "string",
+            "pattern": "^RZN-[0-9]{3}$"
+          },
+          "target_ref": {
+            "$ref": "#/$defs/reasoning_target_ref"
+          },
+          "hint_id": {
+            "type": "string",
+            "pattern": "^HINT-[0-9]{3}$"
+          },
+          "hint_type": {
+            "enum": [
+              "curiosity",
+              "connection",
+              "mechanism",
+              "priority",
+              "flexibility",
+              "safety"
+            ]
+          },
+          "visible_hint": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "observe": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "connect": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "mechanism": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "clinical_weight": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "next_thought": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "causal_chain": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "event",
+              "physiological_response",
+              "symptom_or_sign",
+              "possible_complication",
+              "causal_limits"
+            ],
+            "properties": {
+              "event": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 300
+              },
+              "physiological_response": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 300
+              },
+              "symptom_or_sign": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 300
+              },
+              "possible_complication": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 300
+              },
+              "causal_limits": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 300
+              }
+            }
+          },
+          "concept_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^CONCEPT-[0-9]{3}$"
+            },
+            "uniqueItems": true
+          },
+          "claim_refs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/claim_ref"
+            },
+            "uniqueItems": true
+          },
+          "source_refs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/source_ref"
+            },
+            "uniqueItems": true
+          },
+          "answer_leakage_status": {
+            "enum": [
+              "pass",
+              "review_required",
+              "blocked"
+            ]
+          }
+        }
+      }
+    },
+    "logic_track": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "logic_id",
+          "turn_refs",
+          "task_refs",
+          "signal",
+          "action",
+          "reason",
+          "contrast",
+          "danger",
+          "error_prevented"
+        ],
+        "properties": {
+          "logic_id": {
+            "type": "string",
+            "pattern": "^LOGIC-[0-9]{3}$"
+          },
+          "turn_refs": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/$defs/turn_ref"
+            },
+            "uniqueItems": true
+          },
+          "task_refs": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/$defs/task_ref"
+            },
+            "uniqueItems": true
+          },
+          "signal": {
+            "$ref": "#/$defs/nonempty"
+          },
+          "action": {
+            "$ref": "#/$defs/nonempty"
+          },
+          "reason": {
+            "$ref": "#/$defs/nonempty"
+          },
+          "contrast": {
+            "$ref": "#/$defs/nonempty"
+          },
+          "danger": {
+            "$ref": "#/$defs/nonempty"
+          },
+          "error_prevented": {
+            "$ref": "#/$defs/failure_mode"
+          }
+        }
+      }
+    },
+    "attention_traps": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "trap_id",
+          "target_ref",
+          "attractive_detail",
+          "likely_fixation",
+          "what_it_can_hide",
+          "reorientation_hint"
+        ],
+        "properties": {
+          "trap_id": {
+            "type": "string",
+            "pattern": "^TRAP-[0-9]{3}$"
+          },
+          "target_ref": {
+            "$ref": "#/$defs/reasoning_target_ref"
+          },
+          "attractive_detail": {
+            "$ref": "#/$defs/nonempty"
+          },
+          "likely_fixation": {
+            "$ref": "#/$defs/nonempty"
+          },
+          "what_it_can_hide": {
+            "$ref": "#/$defs/nonempty"
+          },
+          "reorientation_hint": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        }
+      }
+    },
+    "safety_pins": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "pin_id",
+          "target_ref",
+          "risk",
+          "threshold",
+          "required_action_refs",
+          "must_not_delay"
+        ],
+        "properties": {
+          "pin_id": {
+            "type": "string",
+            "pattern": "^PIN-[0-9]{3}$"
+          },
+          "target_ref": {
+            "$ref": "#/$defs/reasoning_target_ref"
+          },
+          "risk": {
+            "$ref": "#/$defs/nonempty"
+          },
+          "threshold": {
+            "$ref": "#/$defs/nonempty"
+          },
+          "required_action_refs": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/$defs/action_ref"
+            },
+            "uniqueItems": true
+          },
+          "must_not_delay": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "visual_anchors": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "anchor_id",
+          "task_refs",
+          "label",
+          "symbol",
+          "meaning"
+        ],
+        "properties": {
+          "anchor_id": {
+            "type": "string",
+            "pattern": "^ANCHOR-[A-Z0-9-]{2,40}$"
+          },
+          "task_refs": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/$defs/task_ref"
+            },
+            "uniqueItems": true
+          },
+          "label": {
+            "$ref": "#/$defs/nonempty"
+          },
+          "symbol": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4
+          },
+          "meaning": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          }
+        }
+      }
+    },
+    "registry_patch": {
+      "$ref": "registry-patch.schema.json"
+    },
+    "quality_gates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "case_fidelity",
+        "exact_task_fidelity",
+        "clinical_chronology",
+        "causal_accuracy",
+        "emergency_priority",
+        "medication_support",
+        "answer_leakage",
+        "hint_relevance",
+        "cognitive_load",
+        "neuroaffirming_language",
+        "cross_case_consistency",
+        "source_traceability"
+      ],
+      "properties": {
+        "case_fidelity": {
+          "enum": [
+            "pass",
+            "review_required",
+            "blocked"
+          ]
+        },
+        "exact_task_fidelity": {
+          "enum": [
+            "pass",
+            "review_required",
+            "blocked"
+          ]
+        },
+        "clinical_chronology": {
+          "enum": [
+            "pass",
+            "review_required",
+            "blocked"
+          ]
+        },
+        "causal_accuracy": {
+          "enum": [
+            "pass",
+            "review_required",
+            "blocked"
+          ]
+        },
+        "emergency_priority": {
+          "enum": [
+            "pass",
+            "review_required",
+            "blocked"
+          ]
+        },
+        "medication_support": {
+          "enum": [
+            "pass",
+            "review_required",
+            "blocked"
+          ]
+        },
+        "answer_leakage": {
+          "enum": [
+            "pass",
+            "review_required",
+            "blocked"
+          ]
+        },
+        "hint_relevance": {
+          "enum": [
+            "pass",
+            "review_required",
+            "blocked"
+          ]
+        },
+        "cognitive_load": {
+          "enum": [
+            "pass",
+            "review_required",
+            "blocked"
+          ]
+        },
+        "neuroaffirming_language": {
+          "enum": [
+            "pass",
+            "review_required",
+            "blocked"
+          ]
+        },
+        "cross_case_consistency": {
+          "enum": [
+            "pass",
+            "review_required",
+            "blocked"
+          ]
+        },
+        "source_traceability": {
+          "enum": [
+            "pass",
+            "review_required",
+            "blocked"
+          ]
+        }
+      }
+    },
+    "workflow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "build_status",
+        "generator_run_id",
+        "generator_identity",
+        "generated_at",
+        "independent_audit_status",
+        "clinical_review_status",
+        "educational_review_status",
+        "candidate_language_review_status",
+        "final_approval_status",
+        "final_approver",
+        "approval_date",
+        "independent_audit_ref",
+        "reviews"
+      ],
+      "properties": {
+        "build_status": {
+          "enum": [
+            "draft",
+            "hold",
+            "blocked",
+            "ready_for_independent_audit"
+          ]
+        },
+        "generator_run_id": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "generator_identity": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "generated_at": {
+          "$ref": "#/$defs/date"
+        },
+        "independent_audit_status": {
+          "enum": [
+            "not_started",
+            "changes_required",
+            "blocked",
+            "pass"
+          ]
+        },
+        "clinical_review_status": {
+          "enum": [
+            "not_started",
+            "changes_required",
+            "blocked",
+            "pass"
+          ]
+        },
+        "educational_review_status": {
+          "enum": [
+            "not_started",
+            "changes_required",
+            "blocked",
+            "pass"
+          ]
+        },
+        "candidate_language_review_status": {
+          "enum": [
+            "not_started",
+            "changes_required",
+            "blocked",
+            "pass"
+          ]
+        },
+        "final_approval_status": {
+          "enum": [
+            "not_started",
+            "changes_required",
+            "blocked",
+            "pass"
+          ]
+        },
+        "final_approver": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "approval_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "independent_audit_ref": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "audit_report_id",
+            "status",
+            "audit_report_hash",
+            "reasoning_layer_hash",
+            "audited_at"
+          ],
+          "properties": {
+            "audit_report_id": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "status": {
+              "enum": [
+                "not_started",
+                "changes_required",
+                "blocked",
+                "pass"
+              ]
+            },
+            "reasoning_layer_hash": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "audited_at": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            },
+            "audit_report_hash": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          }
+        },
+        "reviews": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "clinical_safety",
+            "educational_cognitive_load",
+            "candidate_language",
+            "final_content"
+          ],
+          "properties": {
+            "clinical_safety": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "status",
+                "reviewer_name",
+                "reviewer_role",
+                "reviewer_origin",
+                "review_date",
+                "reasoning_layer_hash",
+                "findings"
+              ],
+              "properties": {
+                "status": {
+                  "enum": [
+                    "not_started",
+                    "assigned",
+                    "changes_required",
+                    "blocked",
+                    "pass"
+                  ]
+                },
+                "reviewer_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "reviewer_role": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "reviewer_origin": {
+                  "enum": [
+                    "human",
+                    "unassigned"
+                  ]
+                },
+                "review_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                },
+                "reasoning_layer_hash": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "pattern": "^[a-f0-9]{64}$"
+                },
+                "findings": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            },
+            "educational_cognitive_load": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "status",
+                "reviewer_name",
+                "reviewer_role",
+                "reviewer_origin",
+                "review_date",
+                "reasoning_layer_hash",
+                "findings"
+              ],
+              "properties": {
+                "status": {
+                  "enum": [
+                    "not_started",
+                    "assigned",
+                    "changes_required",
+                    "blocked",
+                    "pass"
+                  ]
+                },
+                "reviewer_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "reviewer_role": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "reviewer_origin": {
+                  "enum": [
+                    "human",
+                    "unassigned"
+                  ]
+                },
+                "review_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                },
+                "reasoning_layer_hash": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "pattern": "^[a-f0-9]{64}$"
+                },
+                "findings": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            },
+            "candidate_language": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "status",
+                "reviewer_name",
+                "reviewer_role",
+                "reviewer_origin",
+                "review_date",
+                "reasoning_layer_hash",
+                "findings"
+              ],
+              "properties": {
+                "status": {
+                  "enum": [
+                    "not_started",
+                    "assigned",
+                    "changes_required",
+                    "blocked",
+                    "pass"
+                  ]
+                },
+                "reviewer_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "reviewer_role": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "reviewer_origin": {
+                  "enum": [
+                    "human",
+                    "unassigned"
+                  ]
+                },
+                "review_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                },
+                "reasoning_layer_hash": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "pattern": "^[a-f0-9]{64}$"
+                },
+                "findings": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            },
+            "final_content": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "status",
+                "reviewer_name",
+                "reviewer_role",
+                "reviewer_origin",
+                "review_date",
+                "reasoning_layer_hash",
+                "findings"
+              ],
+              "properties": {
+                "status": {
+                  "enum": [
+                    "not_started",
+                    "assigned",
+                    "changes_required",
+                    "blocked",
+                    "pass"
+                  ]
+                },
+                "reviewer_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "reviewer_role": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "reviewer_origin": {
+                  "enum": [
+                    "human",
+                    "unassigned"
+                  ]
+                },
+                "review_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                },
+                "reasoning_layer_hash": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "pattern": "^[a-f0-9]{64}$"
+                },
+                "findings": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reasoning_layer_hash",
+        "hash_algorithm",
+        "hash_scope"
+      ],
+      "properties": {
+        "reasoning_layer_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "hash_algorithm": {
+          "const": "sha256"
+        },
+        "hash_scope": {
+          "const": "reasoning_content_excluding_workflow_integrity_registry_patch_human_approval_and_case_index_approval_date"
+        }
+      }
+    },
+    "source_bundle_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

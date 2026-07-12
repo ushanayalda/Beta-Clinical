@@ -1,0 +1,34 @@
+{
+  "registry_version": "2.0.0",
+  "source_authority": "authority/CASE_AUTHORING_STANDARD_v2.md",
+  "failure_modes": [
+    {
+      "code": "premature_closure",
+      "meaning": "The first plausible explanation becomes final before danger is tested."
+    },
+    {
+      "code": "unsafe_delay",
+      "meaning": "The action threshold is crossed but action is delayed for more proof."
+    },
+    {
+      "code": "station_mismatch",
+      "meaning": "The doctor uses a performance grammar different from the visible task."
+    },
+    {
+      "code": "cognitive_overload",
+      "meaning": "The doctor cannot identify the changed priority and next useful action."
+    },
+    {
+      "code": "communication_breakdown",
+      "meaning": "Communication fails to adapt to risk, misunderstanding, resistance, or autonomy."
+    },
+    {
+      "code": "rigidity",
+      "meaning": "The doctor protects the first path after the evidence changes."
+    },
+    {
+      "code": "performance_freeze",
+      "meaning": "The doctor recognises the change but cannot re-enter the station safely."
+    }
+  ]
+}

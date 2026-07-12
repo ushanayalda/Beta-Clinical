@@ -1,0 +1,454 @@
+{
+  "schema_version": "2.0.0",
+  "case_id": "CP-P001-C001",
+  "case_version": "1.0.0",
+  "reasoning_version": "1.0.0",
+  "canonical_case_hash": "3bb3a78bee70d0dc23b8266b425570515debec695d6b7321194da026224bea0f",
+  "registry_version": "1.0.0",
+  "registry_hash": "5301e2f45c59624750384ba83a30d198dc16b5799c70e4f32dd6dd2280891b47",
+  "task_snapshot": [
+    {
+      "task_ref": "TASK-001",
+      "plain_scope": "Find the safety threshold.",
+      "anchor_id": "ANCHOR-HX-FOCUSED",
+      "time_budget_seconds": 160,
+      "completion_signal": "You have the facts that change risk.",
+      "source_task_text": "Assess the presenting problem."
+    },
+    {
+      "task_ref": "TASK-002",
+      "plain_scope": "Start the first safe action.",
+      "anchor_id": "ANCHOR-IMMEDIATE",
+      "time_budget_seconds": 160,
+      "completion_signal": "The immediate action is underway.",
+      "source_task_text": "Institute immediate management."
+    },
+    {
+      "task_ref": "TASK-003",
+      "plain_scope": "Explain and hand over clearly.",
+      "anchor_id": "ANCHOR-PRESENT",
+      "time_budget_seconds": 160,
+      "completion_signal": "The patient and receiving team know the plan.",
+      "source_task_text": "Explain the urgency and provide a handover."
+    }
+  ],
+  "reading_clock": {
+    "total_seconds": 120,
+    "segments": [
+      {
+        "clock_id": "CLOCK-001",
+        "start_second": 0,
+        "end_second": 40,
+        "label": "Setting",
+        "focus": "Who are you, where are you, and what can happen here?",
+        "target_refs": [
+          "STEM-001"
+        ]
+      },
+      {
+        "clock_id": "CLOCK-002",
+        "start_second": 40,
+        "end_second": 80,
+        "label": "Tasks",
+        "focus": "Turn each task into one visible destination.",
+        "target_refs": [
+          "TASK-001",
+          "TASK-002",
+          "TASK-003"
+        ]
+      },
+      {
+        "clock_id": "CLOCK-003",
+        "start_second": 80,
+        "end_second": 120,
+        "label": "Safety map",
+        "focus": "Keep the urgent path open before entering.",
+        "target_refs": [
+          "STEM-002",
+          "DEC-001"
+        ]
+      }
+    ]
+  },
+  "performance_clock": {
+    "total_seconds": 480,
+    "segments": [
+      {
+        "clock_id": "CLOCK-004",
+        "start_second": 0,
+        "end_second": 160,
+        "label": "Assess",
+        "task_refs": [
+          "TASK-001"
+        ],
+        "move_on_signal": "The risk-changing facts are clear."
+      },
+      {
+        "clock_id": "CLOCK-005",
+        "start_second": 160,
+        "end_second": 320,
+        "label": "Act",
+        "task_refs": [
+          "TASK-002"
+        ],
+        "move_on_signal": "The immediate action has started."
+      },
+      {
+        "clock_id": "CLOCK-006",
+        "start_second": 320,
+        "end_second": 480,
+        "label": "Explain",
+        "task_refs": [
+          "TASK-003"
+        ],
+        "move_on_signal": "The explanation and handover are complete."
+      }
+    ]
+  },
+  "reasoning_nodes": [
+    {
+      "node_id": "RZN-001",
+      "target_ref": "STEM-002",
+      "hint_id": "HINT-001",
+      "hint_type": "curiosity",
+      "visible_hint": "Does the context explain the whole pattern?",
+      "observe": "The symptom began during activity.",
+      "connect": "Context changes probability but does not establish one cause.",
+      "mechanism": "The fixture uses context as a risk-changing clue, not a diagnosis.",
+      "clinical_weight": "Keep both the plausible and urgent paths open.",
+      "next_thought": "Look for the feature that changes the action threshold.",
+      "causal_chain": {
+        "event": "Activity precedes the symptom.",
+        "physiological_response": "A fictional response occurs.",
+        "symptom_or_sign": "The role-player reports discomfort.",
+        "possible_complication": "Delay could worsen the fictional risk.",
+        "causal_limits": "The context alone does not prove the complication or diagnosis."
+      },
+      "concept_refs": [
+        "CONCEPT-001"
+      ],
+      "claim_refs": [
+        "CLAIM-001"
+      ],
+      "source_refs": [
+        "SRC-FIXTURE-001"
+      ],
+      "answer_leakage_status": "pass"
+    },
+    {
+      "node_id": "RZN-002",
+      "target_ref": "TURN-006",
+      "hint_id": "HINT-002",
+      "hint_type": "safety",
+      "visible_hint": "What changed enough to act now?",
+      "observe": "The warning feature and abnormal finding are present.",
+      "connect": "Together they cross the predefined fixture threshold.",
+      "mechanism": "The threshold converts assessment into immediate action.",
+      "clinical_weight": "Further proof must not delay the predefined action.",
+      "next_thought": "Start the action, then continue focused assessment.",
+      "causal_chain": {
+        "event": "The warning cluster becomes available.",
+        "physiological_response": "The fixture risk state changes.",
+        "symptom_or_sign": "The abnormal finding is released.",
+        "possible_complication": "Delay in escalation may cause fictional harm.",
+        "causal_limits": "The finding supports action but does not prove a final diagnosis."
+      },
+      "concept_refs": [
+        "CONCEPT-001"
+      ],
+      "claim_refs": [
+        "CLAIM-001",
+        "CLAIM-002"
+      ],
+      "source_refs": [
+        "SRC-FIXTURE-001"
+      ],
+      "answer_leakage_status": "pass"
+    },
+    {
+      "node_id": "RZN-003",
+      "target_ref": "TASK-003",
+      "hint_id": "HINT-003",
+      "hint_type": "connection",
+      "visible_hint": "What must the patient understand before moving?",
+      "observe": "The patient prefers to remain in the clinic.",
+      "connect": "The concern is practical, but the safety boundary remains.",
+      "mechanism": "Clear explanation can support cooperation without weakening urgency.",
+      "clinical_weight": "Address the concern underneath the resistance.",
+      "next_thought": "Explain the risk and what transfer involves.",
+      "causal_chain": {
+        "event": "The plan is proposed.",
+        "physiological_response": "No physiological claim is made here.",
+        "symptom_or_sign": "The patient expresses reluctance.",
+        "possible_complication": "Reluctance may delay the fictional transfer.",
+        "causal_limits": "Communication affects cooperation, not the underlying fictional condition."
+      },
+      "concept_refs": [],
+      "claim_refs": [
+        "CLAIM-002"
+      ],
+      "source_refs": [
+        "SRC-FIXTURE-001"
+      ],
+      "answer_leakage_status": "pass"
+    },
+    {
+      "node_id": "RZN-004",
+      "target_ref": "DEC-001",
+      "hint_id": "HINT-004",
+      "hint_type": "priority",
+      "visible_hint": "Has assessment now become action?",
+      "observe": "The decision threshold has been crossed.",
+      "connect": "The next task is no longer more data collection.",
+      "mechanism": "The fixture decision point links the warning cluster to immediate escalation.",
+      "clinical_weight": "Action begins now while focused assessment continues in parallel.",
+      "next_thought": "State and start the immediate action.",
+      "causal_chain": {
+        "event": "The threshold evidence becomes available.",
+        "physiological_response": "The fictional risk state is treated as urgent.",
+        "symptom_or_sign": "The warning cluster is present.",
+        "possible_complication": "Delay may increase fictional harm.",
+        "causal_limits": "The threshold supports action without claiming definitive diagnostic proof."
+      },
+      "concept_refs": [
+        "CONCEPT-001"
+      ],
+      "claim_refs": [
+        "CLAIM-001",
+        "CLAIM-002"
+      ],
+      "source_refs": [
+        "SRC-FIXTURE-001"
+      ],
+      "answer_leakage_status": "pass"
+    }
+  ],
+  "logic_track": [
+    {
+      "logic_id": "LOGIC-001",
+      "turn_refs": [
+        "TURN-003",
+        "TURN-004"
+      ],
+      "task_refs": [
+        "TASK-001"
+      ],
+      "signal": "Activity context and sequence.",
+      "action": "Ask focused questions.",
+      "reason": "These facts change risk.",
+      "contrast": "A broad unrelated history would consume time.",
+      "danger": "The warning cluster may remain hidden.",
+      "error_prevented": "cognitive_overload"
+    },
+    {
+      "logic_id": "LOGIC-002",
+      "turn_refs": [
+        "TURN-006",
+        "TURN-007"
+      ],
+      "task_refs": [
+        "TASK-002"
+      ],
+      "signal": "The threshold is crossed.",
+      "action": "Activate escalation.",
+      "reason": "Enough risk exists to act.",
+      "contrast": "Definitive proof is not required in the fixture.",
+      "danger": "Delay after the threshold.",
+      "error_prevented": "unsafe_delay"
+    },
+    {
+      "logic_id": "LOGIC-003",
+      "turn_refs": [
+        "TURN-009",
+        "TURN-010",
+        "TURN-012"
+      ],
+      "task_refs": [
+        "TASK-003"
+      ],
+      "signal": "The patient resists transfer.",
+      "action": "Explain the risk and hand over.",
+      "reason": "Understanding supports safe cooperation.",
+      "contrast": "Repeating an instruction ignores the concern.",
+      "danger": "Communication could delay transfer.",
+      "error_prevented": "communication_breakdown"
+    }
+  ],
+  "attention_traps": [
+    {
+      "trap_id": "TRAP-001",
+      "target_ref": "STEM-002",
+      "attractive_detail": "The symptom has a benign-looking context.",
+      "likely_fixation": "Close the case with the first explanation.",
+      "what_it_can_hide": "The warning cluster and action threshold.",
+      "reorientation_hint": "What detail would change urgency?"
+    }
+  ],
+  "safety_pins": [
+    {
+      "pin_id": "PIN-001",
+      "target_ref": "DEC-001",
+      "risk": "Delay after the predefined threshold.",
+      "threshold": "Warning feature plus abnormal finding.",
+      "required_action_refs": [
+        "ACTION-001"
+      ],
+      "must_not_delay": [
+        "More history.",
+        "Definitive fictional proof."
+      ]
+    }
+  ],
+  "visual_anchors": [
+    {
+      "anchor_id": "ANCHOR-HX-FOCUSED",
+      "task_refs": [
+        "TASK-001"
+      ],
+      "label": "Focused history",
+      "symbol": "\ud83d\udd0e",
+      "meaning": "Ask only what changes safety or the next task."
+    },
+    {
+      "anchor_id": "ANCHOR-IMMEDIATE",
+      "task_refs": [
+        "TASK-002"
+      ],
+      "label": "Immediate action",
+      "symbol": "\ud83d\udea8",
+      "meaning": "Act when the safety threshold is crossed."
+    },
+    {
+      "anchor_id": "ANCHOR-PRESENT",
+      "task_refs": [
+        "TASK-003"
+      ],
+      "label": "Present",
+      "symbol": "\ud83d\udce3",
+      "meaning": "Give meaning and priority, then close."
+    }
+  ],
+  "registry_patch": {
+    "schema_version": "2.0.0",
+    "patch_id": "PATCH-FIXTURE-001",
+    "case_id": "CP-P001-C001",
+    "case_version": "1.0.0",
+    "base_registry_version": "1.0.0",
+    "base_registry_hash": "5301e2f45c59624750384ba83a30d198dc16b5799c70e4f32dd6dd2280891b47",
+    "canonical_case_hash": "3bb3a78bee70d0dc23b8266b425570515debec695d6b7321194da026224bea0f",
+    "reasoning_layer_hash": "be81a8e892d0627c907ac20f71587435436d9cf1192029fdf995ead6f062671b",
+    "concept_additions": [
+      {
+        "concept_id": "CONCEPT-001",
+        "name": "Threshold before certainty",
+        "canonical_statement": "Act when the defined safety threshold is crossed, then continue focused assessment.",
+        "clinical_scope": [
+          "synthetic emergency validation"
+        ],
+        "source_refs": [
+          "SRC-FIXTURE-001"
+        ],
+        "status": "provisional",
+        "approved_by": null,
+        "approved_date": null
+      }
+    ],
+    "concept_updates": [],
+    "guard_additions": [],
+    "terminology_updates": [],
+    "case_index_entry": {
+      "case_id": "CP-P001-C001",
+      "case_version": "1.0.0",
+      "canonical_case_hash": "3bb3a78bee70d0dc23b8266b425570515debec695d6b7321194da026224bea0f",
+      "reasoning_layer_hash": "be81a8e892d0627c907ac20f71587435436d9cf1192029fdf995ead6f062671b",
+      "concept_refs": [
+        "CONCEPT-001"
+      ],
+      "approved_date": null
+    },
+    "conflicts": [],
+    "human_approval": {
+      "status": "approved",
+      "approved_by": "Fixture registry reviewer",
+      "approved_date": "2026-07-12"
+    }
+  },
+  "quality_gates": {
+    "case_fidelity": "pass",
+    "exact_task_fidelity": "pass",
+    "clinical_chronology": "pass",
+    "causal_accuracy": "pass",
+    "emergency_priority": "pass",
+    "medication_support": "pass",
+    "answer_leakage": "pass",
+    "hint_relevance": "pass",
+    "cognitive_load": "pass",
+    "neuroaffirming_language": "pass",
+    "cross_case_consistency": "pass",
+    "source_traceability": "pass"
+  },
+  "workflow": {
+    "build_status": "ready_for_independent_audit",
+    "generator_run_id": "RGEN-FIXTURE-001",
+    "generator_identity": "Fixture reasoning generator",
+    "generated_at": "2026-07-12",
+    "independent_audit_status": "pass",
+    "clinical_review_status": "pass",
+    "educational_review_status": "pass",
+    "candidate_language_review_status": "pass",
+    "final_approval_status": "pass",
+    "final_approver": "Fixture final human approver",
+    "approval_date": "2026-07-12",
+    "independent_audit_ref": {
+      "audit_report_id": "AUDIT-FIXTURE-001",
+      "status": "pass",
+      "reasoning_layer_hash": "be81a8e892d0627c907ac20f71587435436d9cf1192029fdf995ead6f062671b",
+      "audited_at": "2026-07-12",
+      "audit_report_hash": "96ed95b87ce105aa46f22e0274746c283e3320d9980f8c1fa02908bda5d8fa77"
+    },
+    "reviews": {
+      "clinical_safety": {
+        "status": "pass",
+        "reviewer_name": "Fixture reasoning clinical reviewer",
+        "reviewer_role": "clinical safety reviewer",
+        "reviewer_origin": "human",
+        "review_date": "2026-07-12",
+        "reasoning_layer_hash": "be81a8e892d0627c907ac20f71587435436d9cf1192029fdf995ead6f062671b",
+        "findings": []
+      },
+      "educational_cognitive_load": {
+        "status": "pass",
+        "reviewer_name": "Fixture educational reviewer",
+        "reviewer_role": "educational and cognitive-load reviewer",
+        "reviewer_origin": "human",
+        "review_date": "2026-07-12",
+        "reasoning_layer_hash": "be81a8e892d0627c907ac20f71587435436d9cf1192029fdf995ead6f062671b",
+        "findings": []
+      },
+      "candidate_language": {
+        "status": "pass",
+        "reviewer_name": "Fixture language reviewer",
+        "reviewer_role": "candidate-language reviewer",
+        "reviewer_origin": "human",
+        "review_date": "2026-07-12",
+        "reasoning_layer_hash": "be81a8e892d0627c907ac20f71587435436d9cf1192029fdf995ead6f062671b",
+        "findings": []
+      },
+      "final_content": {
+        "status": "pass",
+        "reviewer_name": "Fixture final human approver",
+        "reviewer_role": "final content approver",
+        "reviewer_origin": "human",
+        "review_date": "2026-07-12",
+        "reasoning_layer_hash": "be81a8e892d0627c907ac20f71587435436d9cf1192029fdf995ead6f062671b",
+        "findings": []
+      }
+    }
+  },
+  "integrity": {
+    "reasoning_layer_hash": "be81a8e892d0627c907ac20f71587435436d9cf1192029fdf995ead6f062671b",
+    "hash_algorithm": "sha256",
+    "hash_scope": "reasoning_content_excluding_workflow_integrity_registry_patch_human_approval_and_case_index_approval_date"
+  },
+  "source_bundle_hash": "a353d0abcd42e93b447390515eabf3ee1fe7096e27b99b1d1ec3e175fecb35ad"
+}

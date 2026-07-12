@@ -1,0 +1,75 @@
+{
+  "package": "Clinical Pathway Case System",
+  "version": "2.0.0",
+  "run_at_utc": "2026-07-12T13:40:09.437797+00:00",
+  "final_status": "PASS",
+  "checks": {
+    "package_validation": true,
+    "contract_tests": true,
+    "browser_smoke": true,
+    "javascript_syntax": true,
+    "python_compile": true,
+    "generation_frozen": true,
+    "no_authorised_case": true,
+    "curriculum_40_patterns": true,
+    "curriculum_160_slots": true,
+    "production_index_empty": true,
+    "three_custom_gpt_specs": true,
+    "codex_runbook_present": true
+  },
+  "contract_tests": {
+    "passed": 57,
+    "total": 57
+  },
+  "browser_smoke": {
+    "passed": 12,
+    "total": 12
+  },
+  "curriculum": {
+    "patterns": 40,
+    "case_slots": 160
+  },
+  "generation": {
+    "frozen": true,
+    "authorised_cases": 0
+  },
+  "production_case_count": 0,
+  "clinical_release_status": "HOLD_NO_GENERATED_CASES",
+  "commands": {
+    "package": {
+      "command": "/opt/pyvenv/bin/python scripts/validate_package.py --skip-tests --skip-browser",
+      "returncode": 0,
+      "stdout": "VALID\n",
+      "stderr": "",
+      "pass": true
+    },
+    "contracts": {
+      "command": "/opt/pyvenv/bin/python -m unittest tests/test_system.py -v",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "test_auditor_identity_must_differ (tests.test_system.TestAudit.test_auditor_identity_must_differ) ... ok\ntest_auditor_run_must_differ (tests.test_system.TestAudit.test_auditor_run_must_differ) ... ok\ntest_curriculum_binding_checked (tests.test_system.TestAudit.test_curriculum_binding_checked) ... ok\ntest_pass_cannot_have_open_finding (tests.test_system.TestAudit.test_pass_cannot_have_open_finding) ... ok\ntest_pass_requires_all_checks (tests.test_system.TestAudit.test_pass_requires_all_checks) ... ok\ntest_source_bundle_binding_checked (tests.test_system.TestAudit.test_source_bundle_binding_checked) ... ok\ntest_valid_audit (tests.test_system.TestAudit.test_valid_audit) ... ok\ntest_archived_source_file_required (tests.test_system.TestCanonicalCase.test_archived_source_file_required) ... ok\ntest_archived_source_hash_checked (tests.test_system.TestCanonicalCase.test_archived_source_hash_checked) ... ok\ntest_curriculum_hash_binding (tests.test_system.TestCanonicalCase.test_curriculum_hash_binding) ... ok\ntest_dangling_patient_fact_rejected (tests.test_system.TestCanonicalCase.test_dangling_patient_fact_rejected) ... ok\ntest_duplicate_stem_id_rejected (tests.test_system.TestCanonicalCase.test_duplicate_stem_id_rejected) ... ok\ntest_exact_generation_command_required (tests.test_system.TestCanonicalCase.test_exact_generation_command_required) ... ok\ntest_generator_cannot_be_clinical_reviewer (tests.test_system.TestCanonicalCase.test_generator_cannot_be_clinical_reviewer) ... ok\ntest_gold_run_task_coverage_exact (tests.test_system.TestCanonicalCase.test_gold_run_task_coverage_exact) ... ok\ntest_locked_case_cannot_have_source_gap (tests.test_system.TestCanonicalCase.test_locked_case_cannot_have_source_gap) ... ok\ntest_locked_source_must_be_approved (tests.test_system.TestCanonicalCase.test_locked_source_must_be_approved) ... ok\ntest_source_access_date_required (tests.test_system.TestCanonicalCase.test_source_access_date_required) ... ok\ntest_source_bundle_binding (tests.test_system.TestCanonicalCase.test_source_bundle_binding) ... ok\ntest_urgent_action_delay_rejected (tests.test_system.TestCanonicalCase.test_urgent_action_delay_rejected) ... ok\ntest_valid_case (tests.test_system.TestCanonicalCase.test_valid_case) ... ok\ntest_export_builder_is_deterministic (tests.test_system.TestLearnerExport.test_export_builder_is_deterministic) ... ok\ntest_hidden_governance_key_rejected (tests.test_system.TestLearnerExport.test_hidden_governance_key_rejected) ... ok\ntest_hint_attachment_checked (tests.test_system.TestLearnerExport.test_hint_attachment_checked) ... ok\ntest_index_builds_from_learner_file (tests.test_system.TestLearnerExport.test_index_builds_from_learner_file) ... ok\ntest_release_hash_checked (tests.test_system.TestLearnerExport.test_release_hash_checked) ... ok\ntest_script_must_match_gold_run (tests.test_system.TestLearnerExport.test_script_must_match_gold_run) ... ok\ntest_stem_must_match_canonical (tests.test_system.TestLearnerExport.test_stem_must_match_canonical) ... ok\ntest_valid_learner_export (tests.test_system.TestLearnerExport.test_valid_learner_export) ... ok\ntest_all_schemas_are_valid (tests.test_system.TestPackageContracts.test_all_schemas_are_valid) ... ok\ntest_codex_instructions_exist (tests.test_system.TestPackageContracts.test_codex_instructions_exist) ... ok\ntest_curriculum_case_ids_are_unique (tests.test_system.TestPackageContracts.test_curriculum_case_ids_are_unique) ... ok\ntest_curriculum_has_40_patterns_and_160_slots (tests.test_system.TestPackageContracts.test_curriculum_has_40_patterns_and_160_slots) ... ok\ntest_custom_gpt_boundaries_exist (tests.test_system.TestPackageContracts.test_custom_gpt_boundaries_exist) ... ok\ntest_production_indexes_are_empty (tests.test_system.TestPackageContracts.test_production_indexes_are_empty) ... ok\ntest_queue_is_valid_and_frozen (tests.test_system.TestPackageContracts.test_queue_is_valid_and_frozen) ... ok\ntest_queue_matches_curriculum (tests.test_system.TestPackageContracts.test_queue_matches_curriculum) ... ok\ntest_source_policy_requires_official_sources (tests.test_system.TestPackageContracts.test_source_policy_requires_official_sources) ... ok\ntest_queue_start_records_exact_command (tests.test_system.TestQueueAndRegistry.test_queue_start_records_exact_command) ... ok\ntest_registry_patch_requires_human_approval (tests.test_system.TestQueueAndRegistry.test_registry_patch_requires_human_approval) ... ok\ntest_resolve_case_holds_while_frozen (tests.test_system.TestQueueAndRegistry.test_resolve_case_holds_while_frozen) ... ok\ntest_source_fixture_hash_is_correct (tests.test_system.TestQueueAndRegistry.test_source_fixture_hash_is_correct) ... ok\ntest_canonical_hash_binding (tests.test_system.TestReasoningLayer.test_canonical_hash_binding) ... ok\ntest_forbidden_visible_word_rejected (tests.test_system.TestReasoningLayer.test_forbidden_visible_word_rejected) ... ok\ntest_hint_target_must_resolve (tests.test_system.TestReasoningLayer.test_hint_target_must_resolve) ... ok\ntest_immediate_action_needs_safety_pin (tests.test_system.TestReasoningLayer.test_immediate_action_needs_safety_pin) ... ok\ntest_logic_turn_must_resolve (tests.test_system.TestReasoningLayer.test_logic_turn_must_resolve) ... ok\ntest_open_registry_conflict_blocks_ready (tests.test_system.TestReasoningLayer.test_open_registry_conflict_blocks_ready) ... ok\ntest_reading_clock_contiguous (tests.test_system.TestReasoningLayer.test_reading_clock_contiguous) ... ok\ntest_registry_hash_binding (tests.test_system.TestReasoningLayer.test_registry_hash_binding) ... ok\ntest_requires_locked_case (tests.test_system.TestReasoningLayer.test_requires_locked_case) ... ok\ntest_source_bundle_binding (tests.test_system.TestReasoningLayer.test_source_bundle_binding) ... ok\ntest_task_budgets_total_480 (tests.test_system.TestReasoningLayer.test_task_budgets_total_480) ... ok\ntest_task_snapshot_copies_exact_task (tests.test_system.TestReasoningLayer.test_task_snapshot_copies_exact_task) ... ok\ntest_unsafe_delay_language_rejected (tests.test_system.TestReasoningLayer.test_unsafe_delay_language_rejected) ... ok\ntest_valid_reasoning (tests.test_system.TestReasoningLayer.test_valid_reasoning) ... ok\ntest_visible_hint_max_12_words (tests.test_system.TestReasoningLayer.test_visible_hint_max_12_words) ... ok\n\n----------------------------------------------------------------------\nRan 57 tests in 5.622s\n\nOK\n",
+      "pass": true
+    },
+    "browser": {
+      "command": "/opt/pyvenv/bin/python tests/browser_smoke.py",
+      "returncode": 0,
+      "stdout": "{\n  \"status\": \"PASS\",\n  \"fixture_only\": true,\n  \"checks\": {\n    \"home_surface\": true,\n    \"stem_title\": true,\n    \"task_count\": true,\n    \"two_clock_maps\": true,\n    \"hint_expands\": true,\n    \"progress_changes_without_loss\": true,\n    \"script_turn_count\": true,\n    \"decision_hint_displayed\": true,\n    \"mobile_navigation_opens\": true,\n    \"mobile_menu_accessible_state\": true,\n    \"console_errors_absent\": true,\n    \"page_errors_absent\": true\n  },\n  \"console_errors\": [],\n  \"page_errors\": []\n}\n",
+      "stderr": "",
+      "pass": true
+    },
+    "node": {
+      "command": "node --check website/app.js",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "pass": true
+    },
+    "compile": {
+      "command": "/opt/pyvenv/bin/python -m compileall -q scripts tests",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "pass": true
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "package": "Clinical Pathway Case System",
+  "version": "2.0.0",
+  "sealed_at_utc": "2026-07-12T13:40:59.159025+00:00",
+  "technical_status": "PASS",
+  "generation_frozen": true,
+  "clinical_case_count": 0,
+  "study_ready_case_count": 0,
+  "curriculum_patterns": 40,
+  "curriculum_case_slots": 160,
+  "custom_gpt_count": 3,
+  "website_renderer_status": "READY_EMPTY_LIBRARY",
+  "contract_tests": {
+    "passed": 57,
+    "total": 57
+  },
+  "browser_smoke": {
+    "passed": 12,
+    "total": 12
+  },
+  "authoring_standard_sha256": "d2883ec928156fd27da703c2798d8b91f5cdc3e2a1d45c4e5f7c4854e2604a8f",
+  "manifest_sha256": "f1e81d0de4459a58e1fbc585e848eadfecf39d09197e32c6515c2da274f56d9f",
+  "clinical_release_status": "HOLD_NO_GENERATED_CASES",
+  "statement": "The system is technically ready. No clinical content was generated or released during construction."
+}
